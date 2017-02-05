@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+			}
+
+			body {
+				background-color: #fdfffb;
+			}
+
+			.top-nav {
+				height: 104px;
+				border-bottom: solid #37c837 4px;
+				width: 75%;
+				margin: 0 auto;
+				padding: 0 2em;
+			}
+
+			#logo {
+				height: 55px;
+				margin-top: 22.5px;
+				display: inline-block;
+			}
+
+			#top-nav-link {
+				color: #454837;
+				text-decoration: none;
+				font-size: 24px;
+				float: right;
+				font-family: sans-serif;
+				line-height: 108px;
+			}
+
+			.categories {
+				clear: both;
+				text-align: center;
+			}
+
+			.categories>ul {
+				list-style: none;
+    			list-style-image: none;
+				margin: 0;
+				padding: 0;
+				display: inline-block;
+			}
+
+			.categories>ul>li {
+				display: inline-block;
+			}
+
+			.categories a {
+				color: #454837;
+				text-decoration: none;
+				font-size: 24px;
+				font-family: sans-serif;
+				padding: 0.5em 1em;
+				margin: 2.5em 0.5em;
+				display: inline-block;
+			}
+
+			.selected-category {
+				border-bottom: solid #37c837 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="top-nav">
+			<a href="#" id="logo">
+				<img src="logo.png" alt="code.camdenreslink.com">
+			</a>
+			<a href="#" id="top-nav-link">About Me</a>
+		</nav>
+		<nav class="categories">
+			<ul>
+				<li><a href="#">Data</a></li>
+				<li><a href="#" class="selected-category">Web</a></li>
+				<li><a href="#">Math</a></li>
+				<li><a href="#">Misc</a></li>
+			</ul>
+		</nav>
+		<main>
+			<header>
+				<h1>This is a Wonderful Title</h1>
+				<h2>This is a Subtitle</h2>
+				<div class="article-date">February 4, 2017</div>
+				<figure>
+					<img src="" class="header-img" alt="header image">
+					<figcaption></figcaption>
+				</figure>
+			</header>
+			<article>
+				
+			</article>
+			<aside>
+				<h1>Recent Posts</h1>
+			</aside>
+		</main>
+		<footer>
+		</footer>
+	</body>
+</html>
