@@ -1,37 +1,49 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i" rel="stylesheet">
 		<style>
 			* {
 				box-sizing: border-box;
 				margin: 0;
 			}
 
+			h1, h2, h3, h4, h5, h6 {
+				font-family: 'Noto Sans', sans-serif;
+				font-weight: normal;
+			}
+
 			body {
-				background-color: #fdfffb;
+				background-color: #fff;
 			}
 
 			.top-nav {
-				height: 104px;
-				border-bottom: solid #37c837 4px;
-				width: 75%;
 				margin: 0 auto;
-				padding: 0 2em;
+				padding: 0 15%;
+				background-color: #37c837;
 			}
 
 			#logo {
-				height: 55px;
-				margin-top: 22.5px;
+				color: #ffffff;
+				text-decoration: none;
+				font-size: 20px;
+				font-family: 'Noto Sans', sans-serif;
 				display: inline-block;
+				padding: 5px 0 8px 0;
 			}
 
-			#top-nav-link {
-				color: #454837;
-				text-decoration: none;
-				font-size: 24px;
-				float: right;
-				font-family: sans-serif;
-				line-height: 108px;
+			#logo:hover {
+				text-decoration: underline;
+			}
+
+			#logo-qed {
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				margin-left: 5px;
+				vertical-align: -25%;
+				background-color: #ffffff;
 			}
 
 			.categories {
@@ -52,50 +64,109 @@
 			}
 
 			.categories a {
-				color: #454837;
 				text-decoration: none;
-				font-size: 24px;
-				font-family: sans-serif;
-				padding: 0.5em 1em;
-				margin: 2.5em 0.5em;
+				font-size: 20px;
+				font-family: 'Noto Sans', sans-serif;
+				padding: 2px 30px;
 				display: inline-block;
 			}
 
-			.selected-category {
-				border-bottom: solid #37c837 4px;
+			#selected-category {
+				background-color: #37c837;
+				color: #ffffff;
 			}
+
+			.categories a:not(#selected-category):hover {
+				background-color: #f0f0f0;
+			}
+
+			main {
+				width: 100%;
+				padding: 3% 15%;
+				background-color: #f6f6f6;
+				border-top: 2px solid #ececec;
+			}
+
+			body>header {
+				margin: 5% 18%;
+			}
+
+			body>header>h1 {
+				font-size: 60px;
+				font-style: italic;
+				margin-left: 7%;
+				width: 86%;
+				line-height: 1.2;
+			}
+
+			body>header>h2 {
+				font-size: 35px;
+				color: #bcbcbc;
+				font-style: italic;
+				margin-left: 7%;
+				width: 86%;
+			}
+
+			body>header>h3 {
+				font-size: 20px;
+				color: #bcbcbc;
+			}
+
+			.header-img {
+				width: 100%;
+			}
+
+			main>article {
+				width: 70%;
+				background-color: #ffffff;
+				display: inline-block;
+				vertical-align: top;
+			}
+
+			main>aside {
+				width: 30%;
+				display: inline-block;
+				vertical-align: top;
+			}
+			aside>h1 {
+				text-align:center;
+				padding: 0.5em;
+				font-size: 20px;
+			}
+
+			.fleuron {
+				color: #37c837;;
+			}
+
 		</style>
 	</head>
 	<body>
 		<nav class="top-nav">
-			<a href="#" id="logo">
-				<img src="logo.png" alt="code.camdenreslink.com">
-			</a>
-			<a href="#" id="top-nav-link">About Me</a>
+			<a href="#" id="logo" title="Camden Reslink">code.camdenreslink<span id="logo-qed"></span></a>
 		</nav>
 		<nav class="categories">
 			<ul>
-				<li><a href="#">Data</a></li>
-				<li><a href="#" class="selected-category">Web</a></li>
-				<li><a href="#">Math</a></li>
-				<li><a href="#">Misc</a></li>
+				<li><a href="#">Data</a></li><!--
+			 --><li><a href="#" id="selected-category">Web</a></li><!--
+			 --><li><a href="#">Math</a></li><!--
+			 --><li><a href="#">Misc</a></li><!--
+			 --><li><a href="#">About</a></li>
 			</ul>
 		</nav>
+		<header>
+			<h3>February 4, 2017</h3>
+			<h1>How This Blog Was Created</h1>
+			<h2>Getting Started With Hugo</h2>
+		</header>
 		<main>
-			<header>
-				<h1>This is a Wonderful Title</h1>
-				<h2>This is a Subtitle</h2>
-				<div class="article-date">February 4, 2017</div>
+			<article>
 				<figure>
-					<img src="" class="header-img" alt="header image">
+					<img src="header-img.jpg" class="header-img" alt="header image">
 					<figcaption></figcaption>
 				</figure>
-			</header>
-			<article>
-				
-			</article>
-			<aside>
-				<h1>Recent Posts</h1>
+			</article><!--
+		 --><aside>
+				<h1><span class="fleuron">&#9753;</span> Recent Posts</h1>
 			</aside>
 		</main>
 		<footer>
