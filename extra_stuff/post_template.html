@@ -5,12 +5,13 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				function blink() {
-			        $("#logo-qed").fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
+					$("#logo-qed").stop(true, false);
+			        $("#logo-qed").delay(100).fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
 			    }
 			    var intervalId;
 
 				$('#logo').on('mouseenter', function () {
-					$("#logo-qed").fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
+					blink()
 					intervalId = setInterval(blink, 1400);
 				});
 
@@ -47,7 +48,7 @@
 				font-size: 20px;
 				font-family: 'Noto Sans', sans-serif;
 				display: inline-block;
-				padding: 5px 0 8px 0;
+				padding: 8px 0;
 			}
 
 			#logo-qed {
