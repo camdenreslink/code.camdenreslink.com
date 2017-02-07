@@ -2,6 +2,23 @@
 <html>
 	<head>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				function blink() {
+			        $("#logo-qed").fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
+			    }
+			    var intervalId;
+
+				$('#logo').on('mouseenter', function () {
+					$("#logo-qed").fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
+					intervalId = setInterval(blink, 1400);
+				});
+
+				$('#logo').on('mouseleave', function () {
+					clearInterval(intervalId);
+				});
+			});
+		</script>
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i" rel="stylesheet">
 		<style>
 			* {
@@ -33,17 +50,9 @@
 				padding: 5px 0 8px 0;
 			}
 
-			#logo:hover {
-				text-decoration: underline;
-			}
-
 			#logo-qed {
-				display: inline-block;
-				width: 10px;
-				height: 10px;
-				margin-left: 5px;
-				vertical-align: -25%;
-				background-color: #ffffff;
+				margin: 0 2px;
+				background-color: #fff;
 			}
 
 			.categories {
@@ -64,6 +73,7 @@
 			}
 
 			.categories a {
+				color: #000;
 				text-decoration: none;
 				font-size: 20px;
 				font-family: 'Noto Sans', sans-serif;
@@ -142,7 +152,7 @@
 	</head>
 	<body>
 		<nav class="top-nav">
-			<a href="#" id="logo" title="Camden Reslink">code.camdenreslink<span id="logo-qed"></span></a>
+			<a href="#" id="logo" title="Camden Reslink">code.camdenreslink<span id="logo-qed">&ndash;</span></a>
 		</nav>
 		<nav class="categories">
 			<ul>
