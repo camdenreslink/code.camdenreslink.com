@@ -65,11 +65,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.81454783"
-     inkscape:cx="219.21251"
-     inkscape:cy="590.91791"
+     inkscape:zoom="1.5208438"
+     inkscape:cx="368.19883"
+     inkscape:cy="1100.0778"
      inkscape:document-units="px"
-     inkscape:current-layer="g4384"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="705"
@@ -94,7 +94,7 @@
      id="layer1"
      transform="translate(0,223.22835)">
     <rect
-       style="opacity:1;fill:#fdfffb;fill-opacity:1;stroke:none;stroke-width:6.0999999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#f7f7f7;fill-opacity:1;stroke:none;stroke-width:6.0999999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4274"
        width="743.97736"
        height="1273.2494"
@@ -102,7 +102,9 @@
        y="-221.39279" />
     <g
        id="g4221"
-       transform="matrix(2.1370511,0,0,2.1370511,-95.980368,-511.87544)">
+       transform="matrix(2.1370511,0,0,2.1370511,-95.980368,-511.87544)"
+       inkscape:export-xdpi="120.96506"
+       inkscape:export-ydpi="120.96506">
       <path
          style="fill:#37c837;fill-opacity:1;fill-rule:nonzero;stroke:none"
          d="m 107.37224,151.53313 c -0.40217,0 -0.78308,-0.16933 -1.07942,-0.508 -0.3175,-0.33866 -0.48683,-0.74083 -0.48683,-1.18533 l 0,-4.50846 c 0,-0.46566 0.16933,-0.84666 0.48683,-1.18533 0.29634,-0.33866 0.67725,-0.50799 1.07942,-0.50799 l 2.0955,0 c 0.42333,0 0.78316,0.16933 1.10066,0.50799 0.3175,0.33867 0.46567,0.71967 0.46567,1.18533 l 0,4.50846 c 0,0.4445 -0.14817,0.84667 -0.46567,1.18533 -0.3175,0.33867 -0.67733,0.508 -1.10066,0.508 l -2.0955,0 z m -0.508,-1.69333 c 0,0.14817 0.0423,0.27517 0.14816,0.381 0.10584,0.127 0.23284,0.16933 0.35984,0.16933 l 2.0955,0 c 0.14816,0 0.254,-0.0423 0.35983,-0.16933 0.10583,-0.10583 0.16933,-0.23283 0.16933,-0.381 l 0,-3.04797 -3.13266,3.04797 z m 0,-1.46047 3.13266,-3.04799 c 0,-0.14817 -0.0635,-0.29633 -0.16933,-0.40217 -0.10583,-0.10583 -0.21167,-0.16933 -0.35983,-0.16933 l -2.0955,0 c -0.127,0 -0.254,0.0635 -0.35984,0.16933 -0.10583,0.10584 -0.14816,0.254 -0.14816,0.40217 l 0,3.04799 z"

@@ -5,8 +5,8 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				function blink() {
-					$("#logo-qed").stop(true, false);
-			        $("#logo-qed").delay(100).fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
+					$("#logo-cursor").stop(true, false);
+			        $("#logo-cursor").delay(100).fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
 			    }
 			    var intervalId;
 
@@ -51,7 +51,7 @@
 				padding: 8px 0;
 			}
 
-			#logo-qed {
+			#logo-cursor {
 				margin: 0 2px;
 				background-color: #fff;
 			}
@@ -91,13 +91,6 @@
 				background-color: #f0f0f0;
 			}
 
-			main {
-				width: 100%;
-				padding: 3% 15%;
-				background-color: #f6f6f6;
-				border-top: 2px solid #ececec;
-			}
-
 			body>header {
 				margin: 5% 18%;
 			}
@@ -111,49 +104,167 @@
 			}
 
 			body>header>h2 {
-				font-size: 35px;
+				font-size: 40px;
 				color: #bcbcbc;
 				font-style: italic;
-				margin-left: 7%;
+				margin-left: 12%;
 				width: 86%;
 			}
 
 			body>header>h3 {
 				font-size: 20px;
-				color: #bcbcbc;
 			}
 
 			.header-img {
-				width: 100%;
+				width: 96%;
+				margin: 0 2% 0 2%;
+				display: inline-block;
+			}
+
+			figcaption {
+				color: #bcbcbc;
+				font-size: 0.8em;
+				line-height: 1;
+				font-family: 'Noto Sans', sans-serif;
+				margin: 0 2% 0 5%;
+				font-style: italic;
+			}
+
+			figure {
+				margin-bottom: 5%;
+			}
+
+			main {
+				padding: 0 15% 3% 15%;
 			}
 
 			main>article {
-				width: 70%;
+				width: 65%;
 				background-color: #ffffff;
 				display: inline-block;
 				vertical-align: top;
+				font-size: 18px;
+				line-height: 1.7;
+				border-width: 0 2px 2px 2px;
+				font-family: Georgia, serif;
+				color: #383838;
+				padding-bottom: 2%;
+				z-index: 10;
+			}
+
+			main>article>section {
+				padding: 0 5%;
+			}
+
+			main>article h1 {
+				font-size: 32px;
+				margin-bottom: 2%;
 			}
 
 			main>aside {
 				width: 30%;
 				display: inline-block;
 				vertical-align: top;
-			}
-			aside>h1 {
-				text-align:center;
-				padding: 0.5em;
-				font-size: 20px;
+				margin-left: 5%;
 			}
 
-			.fleuron {
-				color: #37c837;;
+			aside h1 {
+				text-align:center;
+				padding: 5%;
+				font-size: 20px;
+				margin-bottom: 7.5%;
+			}
+
+			aside h2 {
+				padding-top: 2%;
+				font-size: 20px;
+				text-align:center;
+			}
+
+			aside h2>a {
+				text-decoration: none;
+				color: #000;
+				padding: 0 2%;
+			}
+
+			aside h2>a:hover {
+				background-color: #f0f0f0;
+			}
+
+			.recent-post {
+				position: relative;
+				margin: 12% 0;
+			}
+
+			aside h3 {
+				padding: 2% 6%;
+				font-size: 20px;
+				text-align:center;
+				background-color: #37c837;
+				color: #fff;
+				font-size: 18px;
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+
+			aside h4 {
+				font-size: 16px;
+				text-align: center;
+				font-style: italic;
+			}
+
+			.recent-post-img {
+				width: 100%;
+				display: inline-block;
+			}
+
+			footer {
+				margin: 0 auto;
+				padding: 2% 15%;
+				background-color: #37c837;
+			}
+
+			.profile-img {
+				background-color: #fff;
+				margin: 2% 2% 2% 4%;
+				padding: 5px;
+				width: 20%;
+				display: inline-block;
+				vertical-align: top;
+			}
+
+			.profile-snippet {
+				color: #fff;
+				display: inline-block;
+				vertical-align: top;
+				font-size: 16px;
+				line-height: 1.6;
+				font-family: 'Noto Sans', sans-serif;
+				width: 48%;
+				margin: 2%;
+			}
+
+			footer>h1 {
+				color: #fff;
+				font-size: 32px;
+			}
+
+			.cursor {
+				color: #37c837;
+				background-color: #37c837;
+			}
+
+			.cursor-white {
+				color: #fff;
+				background-color: #fff;
 			}
 
 		</style>
 	</head>
 	<body>
 		<nav class="top-nav">
-			<a href="#" id="logo" title="Camden Reslink">code.camdenreslink<span id="logo-qed">&ndash;</span></a>
+			<a href="#" id="logo">code.camdenreslink<span id="logo-cursor">&ndash;</span></a>
 		</nav>
 		<nav class="categories">
 			<ul>
@@ -173,14 +284,58 @@
 			<article>
 				<figure>
 					<img src="header-img.jpg" class="header-img" alt="header image">
-					<figcaption></figcaption>
+					<figcaption>This is a picture or something. Credit to that guy.</figcaption>
 				</figure>
+				<section>
+					<h1><span class="cursor">&ndash;</span> This is a Section Header</h1>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non magna aliquam, commodo erat a, suscipit ipsum. Ut a est eu ex ultrices venenatis at ac magna. Donec viverra libero quis luctus interdum. Donec id semper nulla, id pulvinar sapien. Ut tempor, risus id auctor rutrum, massa ante hendrerit elit, ac vehicula neque lectus vitae eros. Integer id eros varius enim facilisis pharetra. Nulla ante ipsum, ultrices vel mollis sed, tempus eleifend lorem. Morbi nibh ante, iaculis sit amet tellus in, porta sagittis arcu. Proin nec nulla metus. In sed elementum lacus, in auctor neque. Pellentesque tempus, justo eget finibus egestas, felis lacus feugiat tellus, eu dapibus purus erat sit amet turpis. Nullam ligula tortor, sollicitudin a massa id, tempus molestie lorem. Proin hendrerit varius scelerisque.
+
+					Vestibulum in mattis ligula, sit amet euismod ligula. Donec luctus euismod enim, quis tristique mi ornare vitae. Sed scelerisque libero leo, imperdiet lobortis diam tincidunt in. Phasellus sed scelerisque lorem. Donec eget rutrum dui. Etiam tempor ante eu odio posuere, ornare molestie lacus cursus. Pellentesque id quam placerat, scelerisque odio sed, volutpat ipsum. Pellentesque laoreet augue et purus lacinia consequat. Ut fermentum elementum felis, vel convallis leo semper nec. Praesent tristique mauris elit, non elementum mauris mattis ut. Vestibulum faucibus diam ac enim varius, id facilisis enim mattis.
+				</section>
 			</article><!--
 		 --><aside>
-				<h1><span class="fleuron">&#9753;</span> Recent Posts</h1>
-			</aside>
+		 		<h1><span class="cursor">&ndash;</span> Recent Posts</h1>
+		 		<div class="recent-post">
+			 		<a href="#"><img class="recent-post-img" src="header-img.jpg" alt="header image"></a>
+			 		<h2><a href="#">How This Blog Was Created</a></h2>
+			 		<h3>Web</h3>
+			 		<h4>February 4, 2017</h4>
+			 	</div>
+		 		<hr>
+		 		<div class="recent-post">
+			 		<a href="#"><img class="recent-post-img" src="header-img.jpg" alt="header image"></a>
+			 		<h2><a href="#">How This Blog Was Created</a></h2>
+			 		<h3>Web</h3>
+			 		<h4>February 4, 2017</h4>
+			 	</div>
+		 		<hr>
+		 		<div class="recent-post">
+			 		<a href="#"><img class="recent-post-img" src="header-img.jpg" alt="header image"></a>
+			 		<h2><a href="#">How This Blog Was Created</a></h2>
+			 		<h3>Web</h3>
+			 		<h4>February 4, 2017</h4>
+			 	</div>
+		 		<hr>
+		 		<div class="recent-post">
+			 		<a href="#"><img class="recent-post-img" src="header-img.jpg" alt="header image"></a>
+			 		<h2><a href="#">How This Blog Was Created</a></h2>
+			 		<h3>Web</h3>
+			 		<h4>February 4, 2017</h4>
+			 	</div>
+		 		<hr>
+		 		<div class="recent-post">
+			 		<a href="#"><img class="recent-post-img" src="header-img.jpg" alt="header image"></a>
+			 		<h2><a href="#">How This Blog Was Created</a></h2>
+			 		<h3>Web</h3>
+			 		<h4>February 4, 2017</h4>
+			 	</div>
+		 		<hr>
+		 	</aside>
 		</main>
 		<footer>
+			<h1><span class="cursor-white">&ndash;</span> About Camden</h1>
+			<a href="#"><img class="profile-img" src="profile.png"></a><!--
+		 --><div class="profile-snippet">Camden is blah blah blah. And also blah blah. He is currently blah, but used to be blah. He is currently interested in blah blah blah. Camden is blah blah blah. And also blah blah. He is currently blah, but used to be blah. He is currently interested in blah blah blah. Camden is blah blah blah.</div>
 		</footer>
 	</body>
 </html>
