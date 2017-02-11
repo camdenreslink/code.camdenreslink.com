@@ -36,6 +36,7 @@
 				background-color: #fff;
 			}
 
+			/* top navigation containing logo */
 			.top-nav {
 				margin: 0 auto;
 				padding: 0 15%;
@@ -51,11 +52,7 @@
 				padding: 8px 0;
 			}
 
-			#logo-cursor {
-				margin: 0 2px;
-				background-color: #fff;
-			}
-
+			/* secondary navigation containing categories */
 			.categories {
 				clear: both;
 				text-align: center;
@@ -91,11 +88,12 @@
 				background-color: #f0f0f0;
 			}
 
-			body>header {
+			/* article header */
+			.article-header {
 				margin: 5% 18%;
 			}
 
-			body>header>h1 {
+			.article-header-title {
 				font-size: 60px;
 				font-style: italic;
 				margin-left: 7%;
@@ -103,7 +101,7 @@
 				line-height: 1.2;
 			}
 
-			body>header>h2 {
+			.article-header-subtitle {
 				font-size: 40px;
 				color: #bcbcbc;
 				font-style: italic;
@@ -111,28 +109,29 @@
 				width: 86%;
 			}
 
-			body>header>h3 {
+			.article-header-date {
 				font-size: 20px;
 				margin-bottom: 2%;
 			}
 
-			.header-img {
+			/* article image banner */
+			.article-image-banner {
+				margin-bottom: 5%;
+			}
+
+			.article-image-banner>img {
 				width: 96%;
 				margin: 0 2% 0 2%;
 				display: inline-block;
 			}
 
-			figcaption {
+			.article-image-banner>figcaption {
 				color: #bcbcbc;
 				font-size: 0.8em;
 				line-height: 1;
 				font-family: 'Noto Sans', sans-serif;
 				margin: 0 2% 0 5%;
 				font-style: italic;
-			}
-
-			figure {
-				margin-bottom: 5%;
 			}
 
 			main {
@@ -177,7 +176,6 @@
 				text-align:center;
 				padding: 5%;
 				font-size: 20px;
-				margin-bottom: 7.5%;
 			}
 
 			aside h2 {
@@ -258,36 +256,37 @@
 			.cursor {
 				color: #37c837;
 				background-color: #37c837;
+				margin: 0 2px;
 			}
 
 			.cursor-white {
 				color: #fff;
 				background-color: #fff;
+				margin: 0 2px;
 			}
 
 		</style>
 	</head>
 	<body>
 		<nav class="top-nav">
-			<a href="#" id="logo">code.camdenreslink<span id="logo-cursor">&ndash;</span></a>
+			<a href="#" id="logo">code.camdenreslink<span class="cursor-white" id="logo-cursor">&ndash;</span></a>
 		</nav>
 		<nav class="categories">
 			<ul>
 				<li><a href="#">Data</a></li><!--
 			 --><li><a href="#" id="selected-category">Web</a></li><!--
 			 --><li><a href="#">Math</a></li><!--
-			 --><li><a href="#">Misc</a></li><!--
-			 --><li><a href="#">About</a></li>
+			 --><li><a href="#">Misc</a></li>
 			</ul>
 		</nav>
-		<header>
-			<h3>February 4, 2017</h3>
-			<h1>How This Blog Was Created</h1>
-			<h2>Getting Started With Hugo</h2>
+		<header class="article-header">
+			<h3 class="article-header-date">February 4, 2017</h3>
+			<h1 class="article-header-title">How This Blog Was Created</h1>
+			<h2 class="article-header-subtitle">Getting Started With Hugo</h2>
 		</header>
 		<main>
 			<article>
-				<figure>
+				<figure class="article-image-banner">
 					<img src="header-img.jpg" class="header-img" alt="header image">
 					<figcaption>This is a picture or something. Credit to that guy.</figcaption>
 				</figure>
