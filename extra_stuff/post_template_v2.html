@@ -2,354 +2,13 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<style>
-			/* http://meyerweb.com/eric/tools/css/reset/ 
-			   v2.0 | 20110126
-			   License: none (public domain)
-			*/
-
-
-			html, body, div, span, applet, object, iframe,
-			h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-			a, abbr, acronym, address, big, cite, code,
-			del, dfn, em, img, ins, kbd, q, s, samp,
-			small, strike, strong, sub, sup, tt, var,
-			b, u, i, center,
-			dl, dt, dd, ol, ul, li,
-			fieldset, form, label, legend,
-			table, caption, tbody, tfoot, thead, tr, th, td,
-			article, aside, canvas, details, embed, 
-			figure, figcaption, footer, header, hgroup, 
-			menu, nav, output, ruby, section, summary,
-			time, mark, audio, video {
-				margin: 0;
-				padding: 0;
-				border: 0;
-				font-size: 100%;
-				font: inherit;
-				vertical-align: baseline;
-			}
-			/* HTML5 display-role reset for older browsers */
-			article, aside, details, figcaption, figure, 
-			footer, header, hgroup, menu, nav, section {
-				display: block;
-			}
-			body {
-				line-height: 1;
-			}
-			ol, ul {
-				list-style: none;
-			}
-			blockquote, q {
-				quotes: none;
-			}
-			blockquote:before, blockquote:after,
-			q:before, q:after {
-				content: '';
-				content: none;
-			}
-			table {
-				border-collapse: collapse;
-				border-spacing: 0;
-			}
-		</style>
+		<link href="css-reset.css" rel="stylesheet">
+		<link href="styles.css" rel="stylesheet">
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				function blink() {
-					$("#logo-cursor").stop(true, false);
-					$("#logo-cursor").delay(100).fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
-				}
-				var intervalId;
-
-				$('#logo').on('mouseenter', function () {
-					intervalId = setInterval(blink, 1400);
-				});
-
-				$('#logo').on('mouseleave', function () {
-					clearInterval(intervalId);
-				});
-			});
-		</script>
+		<script src="logo-blink.js"></script>
+		<script src="mobile-nav.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i" rel="stylesheet">
-		<style>
-			* {
-				box-sizing: border-box;
-				color: inherit;
-				text-decoration: inherit;
-			}
-
-			body {
-				font-size: 20px;
-				line-height: 1.6;
-				text-decoration: none;
-				font-weight: normal;
-				color: #000000;
-				font-family: 'Noto Sans', sans-serif;
-			}
-
-			#page-header {}
-
-			#primary-nav {
-				background-color: #37C837;
-				padding: 0 15%;
-			}
-
-			#logo>a {
-				color: #FFFFFF;
-				line-height: 2.2;
-			}
-
-			#secondary-nav {
-				text-align: center;
-			}
-
-			#secondary-nav>ul {
-				list-style: none;
-				list-style-image: none;
-			}
-
-			#secondary-nav>ul>li {
-				display: inline-block;
-				text-align: center;
-				width: 5em;
-			}
-
-			#secondary-nav>ul>li#selected-category {
-				background-color: #37c837;
-			}
-
-			#secondary-nav>ul>li:not(#selected-category):hover {
-				background-color: #f0f0f0;
-			}
-
-			#secondary-nav>ul>li>a {
-				line-height: 1.8;
-				display: inline-block;
-				width: 100%;
-			}
-
-			#secondary-nav>ul>li#selected-category>a {
-				color: #FFFFFF;
-			}
-
-			#article-header {
-				margin: 4% 15% 4% 15%;
-			}
-
-			#article-header-title {
-				font-size: 300%;
-				font-style: italic;
-				margin-left: 7%;
-				width: 86%;
-				line-height: 1.2;
-			}
-
-			#article-header-subtitle {
-				font-size: 200%;
-				color: #bcbcbc;
-				font-style: italic;
-				margin-left: 12%;
-				width: 86%;
-			}
-
-			#article-header-date {
-				margin-bottom: 2%;
-			}
-
-			#article-content-aside-wrapper {
-				padding: 0 15% 5% 15%;
-			}
-
-			#article-content {
-				display: inline-block;
-				vertical-align: top;
-				width: 72%;
-				font-family: Georgia, serif;
-				color: rgb(60, 60, 60);
-			}
-
-			#article-image-banner {
-				margin-bottom: 5%;
-			}
-
-			#article-image-banner>img {
-				width: 96%;
-				margin: 0 2%;
-				display: inline-block;
-			}
-
-			#article-image-banner>figcaption {
-				color: #bcbcbc;
-				font-size: 80%;
-				line-height: 1;
-				margin-left: 5%;
-				font-style: italic;
-			}
-
-			#recent-posts {
-				display: inline-block;
-				vertical-align: top;
-				width: 28%;
-				padding-left: 4%;
-			}
-
-			#recent-posts h1 {
-				text-align:center;
-				padding: 5%;
-				font-size: 20px;
-			}
-
-			#recent-posts h2 {
-				padding-top: 2%;
-				font-size: 20px;
-				text-align:center;
-			}
-
-			#recent-posts h2>a {
-				text-decoration: none;
-				color: #000;
-				padding: 0 2%;
-			}
-
-			#recent-posts h2>a:hover {
-				background-color: #f0f0f0;
-			}
-
-			.recent-post {
-				position: relative;
-				margin: 12% 0 10% 0;
-			}
-
-			#recent-posts h3 {
-				padding: 2% 6%;
-				font-size: 20px;
-				text-align:center;
-				background-color: #37c837;
-				color: #fff;
-				font-size: 18px;
-				position: absolute;
-				top: 0;
-				right: 0;
-			}
-
-			#recent-posts h4 {
-				font-size: 16px;
-				text-align: center;
-				font-style: italic;
-			}
-
-			.recent-post-img {
-				width: 100%;
-				display: inline-block;
-			}
-
-			#page-footer {
-				padding: 2% 15%;
-				background-color: #37c837;
-			}
-
-			#profile-img {
-				background-color: #FFFFFF;
-				margin: 0 2% 0 4%;
-				padding: 5px;
-				width: 190px;
-				display: inline-block;
-				vertical-align: top;
-			}
-
-			#profile-snippet {
-				color: #FFFFFF;
-				display: inline-block;
-				vertical-align: top;
-				width: 40%;
-				font-size: 80%;
-			}
-
-			#page-footer>h1 {
-				color: #FFFFFF;
-				font-size: 160%;
-				margin-bottom: 2%;
-			}
-
-			.cursor:after {
-				background-color: #37C837;
-				color: #37C837;
-				content: "\2013";
-			}
-
-			.cursor-white:after {
-				background-color: #FFFFFF;
-				color: #FFFFFF;
-				content: "\2013";
-			}
-
-			@media only screen and (max-width: 700px) {
-				#article-header-title {
-					font-size: 200%;
-					margin-left: 0;
-				}
-
-				#article-header-subtitle {
-					font-size: 150%;
-					margin-left: 0;
-				}
-
-				#secondary-nav>ul>li {
-					display: block;
-					width: 70%;
-					margin-left: 15%;
-				}
-
-				#secondary-nav>ul>li>a {
-					line-height: 2.2;
-				}
-
-				#secondary-nav {
-					padding-top: 3%;
-				}
-			}
-
-			@media only screen and (max-width: 900px) {
-				#article-content {
-					width: 100%;
-				}
-
-				#article-header {
-					margin: 10%;
-				}
-
-				#recent-posts {
-					display: none;
-				}
-
-				#profile-snippet {
-					width: 100%;
-				}
-
-				#profile-img {
-					margin: 5% 0 5% 0;
-				}
-
-				#article-content-aside-wrapper {
-					padding: 0 10% 5% 10%;
-				}
-
-				#page-footer {
-					padding: 10%;
-				}
-
-				#primary-nav {
-					padding: 0 10%;
-				}
-
-				#article-image-banner {
-					margin-bottom: 15%;
-				}
-			}
-		</style>
 	</head>
 	<body>
 		<header id="page-header">
@@ -357,6 +16,12 @@
 				<span id="logo">
 					<a href="#">code.camdenreslink <span class="cursor-white" id="logo-cursor"></span></a>
 				</span>
+				<a class="hamburger-icon">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
 			</nav>
 			<nav id="secondary-nav">
 				<ul>
@@ -390,36 +55,38 @@
 							<p>Vestibulum in mattis ligula, sit amet euismod ligula. Donec luctus euismod enim, quis tristique mi ornare vitae. Sed scelerisque libero leo, imperdiet lobortis diam tincidunt in. Phasellus sed scelerisque lorem. Donec eget rutrum dui. Etiam tempor ante eu odio posuere, ornare molestie lacus cursus. </p>
 							
 							<p>Pellentesque id quam placerat, scelerisque odio sed, volutpat ipsum. Pellentesque laoreet augue et purus lacinia consequat. Ut fermentum elementum felis, vel convallis leo semper nec. Praesent tristique mauris elit, non elementum mauris mattis ut. Vestibulum faucibus diam ac enim varius, id facilisis enim mattis.</p>
+
+							<h1><span class="cursor"></span> This is a Section Header</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non magna aliquam, commodo erat a, suscipit ipsum. Ut a est eu ex ultrices venenatis at ac magna. Donec viverra libero quis luctus interdum. Donec id semper nulla, id pulvinar sapien. Ut tempor, risus id auctor rutrum, massa ante hendrerit elit, ac vehicula neque lectus vitae eros. Integer id eros varius enim facilisis pharetra. Nulla ante ipsum, ultrices vel mollis sed, tempus eleifend lorem.</p>
+							
+							<p>Morbi nibh ante, iaculis sit amet tellus in, porta sagittis arcu. Proin nec nulla metus. In sed elementum lacus, in auctor neque. Pellentesque tempus, justo eget finibus egestas, felis lacus feugiat tellus, eu dapibus purus erat sit amet turpis. Nullam ligula tortor, sollicitudin a massa id, tempus molestie lorem. Proin hendrerit varius scelerisque.</p>
+							
+							<p>Vestibulum in mattis ligula, sit amet euismod ligula. Donec luctus euismod enim, quis tristique mi ornare vitae. Sed scelerisque libero leo, imperdiet lobortis diam tincidunt in. Phasellus sed scelerisque lorem. Donec eget rutrum dui. Etiam tempor ante eu odio posuere, ornare molestie lacus cursus. </p>
+							
+							<p>Pellentesque id quam placerat, scelerisque odio sed, volutpat ipsum. Pellentesque laoreet augue et purus lacinia consequat. Ut fermentum elementum felis, vel convallis leo semper nec. Praesent tristique mauris elit, non elementum mauris mattis ut. Vestibulum faucibus diam ac enim varius, id facilisis enim mattis.</p>
 						</section>
 					</section><!--
 				 --><aside id="recent-posts">
 						<h1><span class="cursor"></span> Recent Posts</h1>
 						<div class="recent-post">
-							<a href="#"><img class="recent-post-img" src="rubik.jpg" alt="rubik image"></a>
-							<h2><a href="#">This is a Dummy Title</a></h2>
-							<h3>Data</h3>
-							<h4>February 4, 2017</h4>
+							<a href="#"><img src="rubik.jpg" alt="rubik image"><div class="recent-post-category">Data</div></a>
+							<div class="recent-post-title"><a href="#">This is a Dummy Title</a></div>
+							<div class="recent-post-date">February 4, 2017</div>
 						</div>
-						<hr>
 						<div class="recent-post">
-							<a href="#"><img class="recent-post-img" src="integral.jpg" alt="integral image"></a>
-							<h2><a href="#">How This Blog Was Created - This Title Is Super Long!!!</a></h2>
-							<h3>Web</h3>
-							<h4>March 22, 2017</h4>
+							<a href="#"><img src="integral.jpg" alt="integral image"><div class="recent-post-category">Web</div></a>
+							<div class="recent-post-title"h2><a href="#">How This Blog Was Created - This Title Is Super Long!!!</a></div>
+							<div class="recent-post-date">March 22, 2017</div>
 						</div>
-						<hr>
 						<div class="recent-post">
-							<a href="#"><img class="recent-post-img" src="miller.jpg" alt="miller image"></a>
-							<h2><a href="#">Recent Post #3</a></h2>
-							<h3>Math</h3>
-							<h4>April 21, 2017</h4>
+							<a href="#"><img src="miller.jpg" alt="miller image"><div class="recent-post-category">Math</div></a>
+							<div class="recent-post-title"><a href="#">Recent Post #3</a></div>
+							<div class="recent-post-date">April 21, 2017</div>
 						</div>
-						<hr>
 						<div class="recent-post">
-							<a href="#"><img class="recent-post-img" src="header-img.jpg" alt="header image"></a>
-							<h2><a href="#">This Will Be a Misc Blog Post</a></h2>
-							<h3>Misc</h3>
-							<h4>May 2, 2017</h4>
+							<a href="#"><img src="header-img.jpg" alt="header image"><div class="recent-post-category">Misc</div></a>
+							<div class="recent-post-title"h2><a href="#">This Will Be a Misc Blog Post</a></div>
+							<div class="recent-post-date">May 2, 2017</div>
 						</div>
 					</aside>
 				</section>
