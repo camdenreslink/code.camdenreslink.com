@@ -2,181 +2,16 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<style>
-			/* http://meyerweb.com/eric/tools/css/reset/ 
-			   v2.0 | 20110126
-			   License: none (public domain)
-			*/
-
-
-			html, body, div, span, applet, object, iframe,
-			h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-			a, abbr, acronym, address, big, cite, code,
-			del, dfn, em, img, ins, kbd, q, s, samp,
-			small, strike, strong, sub, sup, tt, var,
-			b, u, i, center,
-			dl, dt, dd, ol, ul, li,
-			fieldset, form, label, legend,
-			table, caption, tbody, tfoot, thead, tr, th, td,
-			article, aside, canvas, details, embed, 
-			figure, figcaption, footer, header, hgroup, 
-			menu, nav, output, ruby, section, summary,
-			time, mark, audio, video {
-				margin: 0;
-				padding: 0;
-				border: 0;
-				font-size: 100%;
-				font: inherit;
-				vertical-align: baseline;
-			}
-			/* HTML5 display-role reset for older browsers */
-			article, aside, details, figcaption, figure, 
-			footer, header, hgroup, menu, nav, section {
-				display: block;
-			}
-			body {
-				line-height: 1;
-			}
-			ol, ul {
-				list-style: none;
-			}
-			blockquote, q {
-				quotes: none;
-			}
-			blockquote:before, blockquote:after,
-			q:before, q:after {
-				content: '';
-				content: none;
-			}
-			table {
-				border-collapse: collapse;
-				border-spacing: 0;
-			}
-		</style>
+		<link href="css-reset.css" rel="stylesheet">
+		<link href="styles.css" rel="stylesheet">
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				function blink() {
-					$("#logo-cursor").stop(true, false);
-					$("#logo-cursor").delay(100).fadeTo(50, 0).delay(650).fadeTo(50, 1.0);
-				}
-				var intervalId;
-
-				$('#logo').on('mouseenter', function () {
-					intervalId = setInterval(blink, 1400);
-				});
-
-				$('#logo').on('mouseleave', function () {
-					clearInterval(intervalId);
-				});
-			});
-		</script>
+		<script src="logo-blink.js"></script>
+		<script src="mobile-nav.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i" rel="stylesheet">
 		<style>
-			* {
-				box-sizing: border-box;
-				color: inherit;
-				text-decoration: inherit;
-			}
-
-			body {
-				font-size: 20px;
-				line-height: 1.6;
-				text-decoration: none;
-				font-weight: normal;
-				color: #000000;
-				font-family: 'Noto Sans', sans-serif;
-			}
-
-			#page-header {}
-
-			#primary-nav {
-				background-color: #37C837;
-				padding: 0 15%;
-			}
-
-			#logo>a {
-				color: #FFFFFF;
-				line-height: 2.2;
-			}
-
-			#secondary-nav {
-				text-align: center;
-			}
-
-			#secondary-nav>ul {
-				list-style: none;
-				list-style-image: none;
-			}
-
-			#secondary-nav>ul>li {
-				display: inline-block;
-				text-align: center;
-				width: 5em;
-			}
-
-			#secondary-nav>ul>li#selected-category {
-				background-color: #37c837;
-			}
-
-			#secondary-nav>ul>li:not(#selected-category):hover {
-				background-color: #f0f0f0;
-			}
-
-			#secondary-nav>ul>li>a {
-				line-height: 1.8;
-				display: inline-block;
-				width: 100%;
-			}
-
-			#secondary-nav>ul>li#selected-category>a {
-				color: #FFFFFF;
-			}
-
 			main {
-				padding: 5% 15%;
-			}
-
-			#page-footer {
-				padding: 2% 15%;
-				background-color: #37c837;
-			}
-
-			#profile-img {
-				background-color: #FFFFFF;
-				margin: 0 2% 0 4%;
-				padding: 5px;
-				width: 190px;
-				display: inline-block;
-				vertical-align: top;
-			}
-
-			#profile-snippet {
-				color: #FFFFFF;
-				display: inline-block;
-				vertical-align: top;
-				width: 40%;
-				font-size: 80%;
-			}
-
-			#page-footer>h1 {
-				color: #FFFFFF;
-				font-size: 160%;
-				margin-bottom: 2%;
-			}
-
-			.cursor:after {
-				background-color: #37C837;
-				color: #37C837;
-				content: "\2013";
-			}
-
-			.cursor-white:after {
-				background-color: #FFFFFF;
-				color: #FFFFFF;
-				content: "\2013";
+				padding: 5% 7.5%;
 			}
 
 			.post-listing {
@@ -219,18 +54,6 @@
 				background-color: #f0f0f0;
 			}
 
-			.post-listing-img-wrapper h3 {
-				padding: 2% 6%;
-				font-size: 20px;
-				text-align:center;
-				background-color: #37c837;
-				color: #fff;
-				font-size: 18px;
-				position: absolute;
-				top: 0;
-				right: 0;
-			}
-
 			.post-listing h4 {
 				font-style: italic;
 				font-size: 90%;
@@ -266,30 +89,7 @@
 				content: "\2013";
 			}
 
-			@media (max-width:900px) and (min-width:700px) {
-				main {
-					padding: 5%;
-				}
-			}
-
 			@media only screen and (max-width: 700px) {
-
-				#profile-snippet {
-					width: 100%;
-				}
-
-				#profile-img {
-					margin: 5% 0 5% 0;
-				}
-
-				#page-footer {
-					padding: 10%;
-				}
-
-				#primary-nav {
-					padding: 0 10%;
-				}
-
 				.post-listing-img-wrapper {
 					display: block;
 					width: 100%;
@@ -305,25 +105,9 @@
 					width: 86%;
 					margin: 12% 7% 14% 7%;
 				}
-
-				#secondary-nav>ul>li {
-					display: block;
-					width: 70%;
-					margin-left: 15%;
-				}
-
-				#secondary-nav>ul>li>a {
-					line-height: 2.2;
-				}
-
-				#secondary-nav {
-					padding-top: 3%;
-				}
-
-				main {
-					padding: 15% 5%;
-				}
 			}
+
+			
 
 		</style>
 	</head>
@@ -333,53 +117,59 @@
 				<span id="logo">
 					<a href="#">code.camdenreslink <span class="cursor-white" id="logo-cursor"></span></a>
 				</span>
+				<a class="hamburger-icon">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
 			</nav>
 			<nav id="secondary-nav">
 				<ul>
-					<li id="selected-category"><a href="#">All</a></li><!--
-				 --><li><a href="#">Data</a></li><!--
-				 --><li><a href="#">Web</a></li><!--
-				 --><li><a href="#">Math</a></li><!--
-				 --><li><a href="#">Misc</a></li>
+					<li><a href="#">All</a></li><!--
+					--><li><a href="#">Data</a></li><!--
+					--><li id="selected-category"><a href="#">Web</a></li><!--
+					--><li><a href="#">Math</a></li><!--
+					--><li><a href="#">Misc</a></li>
 				</ul>
 			</nav>
 		</header>
 		<main>
 			<article class="post-listing">
-				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="rubik.jpg" alt="rubik image"><h3>Data</h3></span></a>
+				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="rubik.jpg" alt="rubik image"><div class="recent-post-category">Data</div></span></a>
 				<div class="post-listing-details">
-					<h4>February 4, 2017</h4>
-					<h2><a href="#">This is a Dummy Title</a></h2>
+					<div class="post-listing-date">February 4, 2017</div>
+					<div class="post-listing-title"><a href="#">This is a Dummy Title</a></div>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non magna aliquam, commodo erat a, suscipit ipsum. Ut a est eu ex ultrices venenatis at ac magna. Donec viverra libero quis luctus interdum. Donec id semper nulla, id pulvinar sapien. Ut tempor, risus...</p>
 					<a class="post-listing-read-more" href="#">Read More</a>
 				</div>
 			</article>
 			<div class="post-listing-divider"></div>
 			<article class="post-listing">
-				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="integral.jpg" alt="integral image"><h3>Web</h3></span></a>
+				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="integral.jpg" alt="integral image"><div class="recent-post-category">Web</div></span></a>
 				<div class="post-listing-details">
-					<h4>March 22, 2017</h4>
-					<h2><a href="#">How This Blog Was Created - This Title Is Super Long!!!</a></h2>
+					<div class="post-listing-date">March 22, 2017</div>
+					<div class="post-listing-title"><a href="#">How This Blog Was Created - This Title Is Super Long!!!</a></div>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non magna aliquam, commodo erat a, suscipit ipsum. Ut a est eu ex ultrices venenatis at ac magna. Donec viverra libero quis luctus interdum. Donec id semper nulla, id pulvinar sapien. Ut tempor, risus...</p>
 					<a class="post-listing-read-more" href="#">Read More</a>
 				</div>
 			</article>
 			<div class="post-listing-divider"></div>
 			<article class="post-listing">
-				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="miller.jpg" alt="miller image"><h3>Math</h3></span></a>
+				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="miller.jpg" alt="miller image"><div class="recent-post-category">Math</div></span></a>
 				<div class="post-listing-details">
-					<h4>April 21, 2017</h4>
-					<h2><a href="#">Recent Post #3</a></h2>
+					<div class="post-listing-date">April 21, 2017</div>
+					<div class="post-listing-title"><a href="#">Recent Post #3</a></div>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non magna aliquam, commodo erat a, suscipit ipsum. Ut a est eu ex ultrices venenatis at ac magna. Donec viverra libero quis luctus interdum. Donec id semper nulla, id pulvinar sapien. Ut tempor, risus...</p>
 					<a class="post-listing-read-more" href="#">Read More</a>
 				</div>
 			</article>
 			<div class="post-listing-divider"></div>
 			<article class="post-listing">
-				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="header-img.jpg" alt="header image"><h3>Misc</h3></span></a>
+				<a href="#"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="header-img.jpg" alt="header image"><div class="recent-post-category">Misc</div></span></a>
 				<div class="post-listing-details">
-					<h4>May 2, 2017</h4>
-					<h2><a href="#">This Will Be a Misc Blog Post</a></h2>
+					<div class="post-listing-date">May 2, 2017</div>
+					<div class="post-listing-title"><a href="#">This Will Be a Misc Blog Post</a></div>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non magna aliquam, commodo erat a, suscipit ipsum. Ut a est eu ex ultrices venenatis at ac magna. Donec viverra libero quis luctus interdum. Donec id semper nulla, id pulvinar sapien. Ut tempor, risus...</p>
 					<a class="post-listing-read-more" href="#">Read More</a>
 				</div>
@@ -388,7 +178,7 @@
 		<footer id="page-footer">
 			<h1><span class="cursor-white"></span> About Camden</h1>
 			<a href="#"><img id="profile-img" src="profile.png"></a><!--
-		 --><div id="profile-snippet">Camden is blah blah blah. And also blah blah. He is currently blah, but used to be blah. He is currently interested in blah blah blah. Camden is blah blah blah. And also blah blah. He is currently blah, but used to be blah. He is currently interested in blah blah blah. Camden is blah blah blah.</div>
+			--><div id="profile-snippet">Camden is blah blah blah. And also blah blah. He is currently blah, but used to be blah. He is currently interested in blah blah blah. Camden is blah blah blah. And also blah blah. He is currently blah, but used to be blah. He is currently interested in blah blah blah. Camden is blah blah blah.</div>
 		</footer>
 	</body>
 </html>
