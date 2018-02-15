@@ -1,4 +1,4 @@
-baseURL = "http://blog.hugoexample.com/"
+baseURL = "https://code.camdenreslink.com/"
 languageCode = "en-us"
-title = "Hugo Example Blog"
+title = "Camden Reslink - Software Developer"
 canonifyURLs = true
