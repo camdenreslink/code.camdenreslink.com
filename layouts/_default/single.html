@@ -1,21 +1,35 @@
-{{ partial "header.html" . }}
-<body>
-{{ partial "navbar.html" . }}
-<div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <div class="well well-sm">
-                    <h3>{{ .Title }}<br> <small>{{ .Description }}</small></h3>
-                    <hr>
-                    {{ .Content }}
-            </div>
-        </div>
-
-        <!-- Sidebar -->
-        <div class="col-md-3">
-            {{ partial "menu.html" . }}
-        </div>
-    </div>
-{{ partial "footer.copyright.html" . }}
-</div>
-{{ partial "footer.html" . }}
+<!doctype html>
+<html lang="en">
+    {{ partial "head.html" . }}
+    <body>
+        {{ partial "navbar.html" . }}
+        <main>
+			<article>
+				<header id="article-header">
+					<h3 id="article-header-date">{{ .Date.Format "January 2, 2006" }}</h3>
+					<h1 id="article-header-title">{{ .Title }}</h1>
+					<h2 id="article-header-subtitle">{{ .Params.subtitle }}</h2>
+                </header>
+				<section id="article-content">
+					<figure id="article-image-banner">
+                        <img src="{{ (.Resources.GetMatch "img/header-img.*").RelPermalink }}" class="header-img" alt="header image">
+						<figcaption>{{ .Params.bannerFigCaption }}</figcaption>
+					</figure>
+					<section>{{ .Content }}</section>
+				</section><!--
+				--><aside id="recent-posts">
+					<h1>Recent Posts</h1>
+					{{/* Display the most recent posts, excluding the current page */}}
+					{{ range first 5 (where (where .Site.Pages "UniqueID" "!=" .UniqueID) "IsPage" true ) }}
+						<div class="recent-post">
+							<a href="{{ .Permalink }}"><img src="{{ partial "thumbnail-url.html" . }}" alt="{{ .Title }}"><div class="recent-post-category">{{ .Section | humanize }}</div></a>
+							<div class="recent-post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+							<div class="recent-post-date">{{ .Date.Format "January 2, 2006" }}</div>
+						</div>
+					{{ end }}
+				</aside>
+			</article>
+		</main>
+        {{ partial "footer.html" . }}
+    </body>
+</html>

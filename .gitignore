@@ -10,3 +10,8 @@ $RECYCLE.BIN/
 
 # OSX
 .DS_Store
+
+# Node dirs
+.npm
+node_modules
+npm-debug.log*

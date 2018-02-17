@@ -1,0 +1,48 @@
+// Colors
+
+@primary-color: #084B7F;
+@primary-text-color: #3c3c3c;
+@secondary-text-color: #bcbcbc;
+@hover-background-color: #f0f0f0;
+
+// Media Queries
+@for-phone-only: ~"(max-width: 599px)";
+@for-tablet-portrait-up: ~"(min-width: 599px)";
+@for-tablet-landscape-up: ~"(min-width: 900px)";
+@for-desktop-up: ~"(min-width: 1200px)";
+@for-big-desktop-up: ~"(min-width: 1800px)";
+
+// Gutter Widths
+@mobile-gutter-size: 7.5%;
+@desktop-gutter-size: 15%;
+
+// Text
+body {
+    font-size: 20px;
+    line-height: 1.6;
+    text-decoration: none;
+    font-weight: normal;
+    color: @primary-text-color;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+// Page Layout
+main {
+    padding: 0 @mobile-gutter-size;
+}
+
+@media @for-tablet-portrait-up {
+    main {
+        padding: 0 @desktop-gutter-size;
+    }
+}
+
+// Imports
+@import "header.less";
+@import "header.hamburger.less";
+@import "footer.less";
+@import "article.less";
+@import "article.recent-posts.less";
+@import "list.less";
+
+

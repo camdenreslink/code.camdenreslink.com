@@ -2,3 +2,5 @@ baseURL = "https://code.camdenreslink.com/"
 languageCode = "en-us"
 title = "Camden Reslink - Software Developer"
 canonifyURLs = true
+paginate = 10
+summaryLength = 40

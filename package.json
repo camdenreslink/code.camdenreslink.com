@@ -1,0 +1,25 @@
+{
+  "name": "code.camdenreslink.com",
+  "version": "1.0.0",
+  "description": "Personal tech blog",
+  "main": "index.js",
+  "scripts": {
+    "create-thumbnails": "node ./utilities/createThumbnails.js",
+    "build-css": "lessc ./src-static/less/styles.less ./static/css/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camdenreslink/code.camdenreslink.com.git"
+  },
+  "author": "Camden Reslink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/camdenreslink/code.camdenreslink.com/issues"
+  },
+  "homepage": "https://github.com/camdenreslink/code.camdenreslink.com#readme",
+  "devDependencies": {
+    "minimatch": "^3.0.4",
+    "recursive-readdir": "^2.2.1",
+    "sharp": "^0.19.0"
+  }
+}

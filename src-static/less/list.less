@@ -1,0 +1,125 @@
+.listing-container {
+    margin-top: 7.5%;
+}
+
+.post-listing-img-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.post-listing-img {
+    width: 100%;
+    height: 100%;
+}
+
+.post-listing-details {
+    display: block;
+    width: 100%;
+    padding: 0;
+}
+
+.post-listing-date {
+    font-size: 80%;
+    font-style: italic;
+    margin-top: 2%;
+}
+
+.post-listing-title {
+    font-size: 150%;
+    font-weight: bold;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    line-height: 1.2;
+}
+
+.post-listing-title {
+    a {
+        text-decoration: none;
+    }
+}
+
+.post-listing-title {
+    a:hover {
+        color: @primary-color;
+    }
+}
+
+.post-listing-details p {
+    font-size: 80%;
+	line-height: 1.4;
+}
+
+.post-listing-read-more {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0 2%;
+    margin-left: -2%;
+    margin-top: 2%;
+}
+
+.post-listing-read-more:hover {
+    background-color: @hover-background-color;
+}
+
+.post-listing-divider:not(:last-of-type) {
+    background-color: @primary-color;
+    width: 100%;
+    height: 4px;
+    margin: 10% 0 12% 0;
+}
+
+.pagination {
+    position: relative;
+    margin-top: 5%;
+}
+
+.pagination:after { // clearfix hack
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.pagination-button {
+    background-color: @primary-color;
+    text-decoration: none;
+    color: #fff;
+    padding: 0.5em 1em;
+    vertical-align: middle;
+}
+
+.pagination-button-prev {
+    float: left;
+}
+
+.pagination-button-next {
+    float: right;
+}
+
+@media @for-tablet-landscape-up {
+    .listing-container {
+        margin-top: 5%;
+    }
+
+    .post-listing-img-wrapper {
+        display: inline-block;
+        vertical-align: top;
+        width: 30%;
+    }
+
+    .post-listing-details {
+        display: inline-block;
+        vertical-align: top;
+        width: 65%;
+        padding-left: 5%;
+    }
+
+    .post-listing-date {
+        margin: 0;
+    }
+
+    .post-listing-divider:not(:last-of-type) {
+        width: 60%;
+        margin: 5% 20% 7% 20%;
+    }
+}
