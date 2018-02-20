@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="twoColumnLayoutLeft.svg"
+   inkscape:export-filename="C:\camden\git\code.camdenreslink.com\content\misc\getting-started-with-the-hugo-static-site-generator\img\twoColumnLayoutLeft.png"
+   inkscape:export-xdpi="106.1"
+   inkscape:export-ydpi="106.1">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="726.7765"
+     inkscape:cy="574.05818"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1536"
+     inkscape:window-height="801"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4485"
+       width="154.21428"
+       height="188.9881"
+       x="28.726194"
+       y="45.267857" />
+    <g
+       transform="translate(-0.98272529,-7.6351109)"
+       id="g4560">
+      <rect
+         y="55.842926"
+         x="34.43362"
+         height="16.22611"
+         width="144.76488"
+         id="rect4497"
+         style="fill:none;fill-opacity:1;stroke:#ff2a4c;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4491-3"
+         y="67.952248"
+         x="37.873924"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:11.28888893px;stroke-width:0.26458332"
+           y="67.952248"
+           x="37.873924"
+           id="tspan4489-6"
+           sodipodi:role="line">Header Nav</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="51.105244"
+       y="226.90741"
+       id="text4491-60"><tspan
+         sodipodi:role="line"
+         id="tspan4489-67"
+         x="51.105244"
+         y="226.90741"
+         style="font-size:11.28888893px;stroke-width:0.26458332">TWO COLUMN LAYOUT</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#2a2cff;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4487"
+       width="87.3125"
+       height="142.11118"
+       x="34.03672"
+       y="69.466202" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="67.537682"
+       y="85.257774"
+       id="text4491"><tspan
+         sodipodi:role="line"
+         id="tspan4489"
+         x="67.537682"
+         y="85.257774"
+         style="font-size:11.28888893px;stroke-width:0.26458332">Title</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="53.280624"
+       y="115.57151"
+       id="text4495"><tspan
+         sodipodi:role="line"
+         id="tspan4493"
+         x="53.280624"
+         y="115.57151"
+         style="stroke-width:0.26458332">Content goes here</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#ff2a4c;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4497-1"
+       width="49.349659"
+       height="142.64459"
+       x="128.22836"
+       y="69.466202" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="131.8156"
+       y="82.838928"
+       id="text4491-3-2"><tspan
+         sodipodi:role="line"
+         id="tspan4489-6-7"
+         x="131.8156"
+         y="82.838928"
+         style="font-size:11.28888893px;stroke-width:0.26458332">Sidebar </tspan><tspan
+         sodipodi:role="line"
+         x="131.8156"
+         y="96.950043"
+         style="font-size:11.28888893px;stroke-width:0.26458332"
+         id="tspan4544">Nav</tspan></text>
+  </g>
+</svg>

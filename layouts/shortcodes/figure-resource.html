@@ -1,0 +1,32 @@
+{{ $resource := .Get "resource" }}
+{{ $imgProcCommand := .Get "imgProcCommand" }}
+{{ $imgProcOptions := .Get "imgProcOptions" }}
+{{ $link := .Get "link" }}
+{{ $target := .Get "target" }}
+{{ $rel := .Get "rel" }}
+{{ $alt := .Get "alt" }}
+{{ $title := .Get "title" }}
+{{ $caption := .Get "caption" }}
+{{ $captionLink := .Get "captionLink" }}
+{{ $class := .Get "class" }}
+{{ $height := .Get "height" }}
+{{ $width := .Get "width" }}
+
+{{if .Get "imgProcCommand"}}
+    {{ .Scratch.Add "resourceUrl" (partial "resource-url.html" (dict "page" .Page "resource" $resource "imgProcCommand" $imgProcCommand "imgProcOptions" $imgProcOptions)) }}
+{{ else }}
+    {{ .Scratch.Add "resourceUrl" (.Page.Resources.GetMatch (printf "%s*" $resource)).Permalink }}
+{{ end }}
+
+<figure{{ with $class }} class="{{ . }}"{{ end }}>
+    {{ with $link }}<a href="{{ . }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ end }}
+        <img src="{{ .Scratch.Get "resourceUrl" }}"{{ with $alt }} alt="{{ . }}"{{ end }}{{ with $title }} title="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}{{ with $width }} width="{{ . }}"{{ end }}>
+    {{ with $link }}</a>{{ end }}
+    {{ with $caption }}
+        <figcaption>
+            {{ with $captionLink }}<a href="{{ . }}">{{ end }}
+                {{ . }}
+            {{ with $captionLink }}</a>{{ end }}
+        </figcaption>
+    {{ end }}
+</figure>

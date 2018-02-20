@@ -1,10 +1,11 @@
 body {
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.8;
   text-decoration: none;
   font-weight: normal;
   color: #3c3c3c;
   font-family: 'Noto Sans', sans-serif;
+  background-color: #f1f1f1;
 }
 main {
   padding: 0 7.5%;
@@ -14,17 +15,20 @@ main {
     padding: 0 15%;
   }
 }
+#page-header {
+  font-size: 20px;
+}
 #primary-nav {
   background-color: #084B7F;
   padding: 0 15%;
 }
 #logo a {
-  color: #FFFFFF;
+  color: #f1f1f1;
   line-height: 2.5;
 }
 #logo .cursor-white:after {
-  background-color: #FFFFFF;
-  color: #FFFFFF;
+  background-color: #f1f1f1;
+  color: #f1f1f1;
   content: "\2013";
 }
 #secondary-nav {
@@ -39,10 +43,10 @@ main {
   background-color: #084B7F;
 }
 #secondary-nav ul li#selected-category a {
-  color: #FFFFFF;
+  color: #f1f1f1;
 }
 #secondary-nav ul li:not(#selected-category):hover {
-  background-color: #f0f0f0;
+  background-color: #e4e4e4;
 }
 #secondary-nav ul li {
   display: inline-block;
@@ -86,7 +90,7 @@ main {
   position: absolute;
   height: 6px;
   width: 100%;
-  background: #fff;
+  background: #f1f1f1;
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
@@ -124,7 +128,7 @@ main {
   }
 }
 #profile-img {
-  background-color: #FFFFFF;
+  background-color: #f1f1f1;
   margin: 0 0 5% 0;
   padding: 5px;
   width: 190px;
@@ -136,7 +140,7 @@ main {
   margin: 15px 5px;
 }
 #profile-snippet {
-  color: #FFFFFF;
+  color: #f1f1f1;
   display: inline-block;
   vertical-align: top;
   width: 100%;
@@ -146,9 +150,10 @@ main {
   padding: 25px 7.5%;
   background-color: #084B7F;
   margin-top: 5%;
+  font-size: 20px;
 }
 #page-footer h1 {
-  color: #FFFFFF;
+  color: #f1f1f1;
   font-size: 160%;
   margin-bottom: 25px;
   display: block;
@@ -157,7 +162,7 @@ main {
   color: #9ac8ec;
 }
 #page-footer a:hover {
-  color: #fff;
+  color: #f1f1f1;
 }
 @media (min-width: 599px) {
   #page-footer {
@@ -177,7 +182,7 @@ main {
   line-height: 1.2;
 }
 #article-header-subtitle {
-  color: #bcbcbc;
+  color: #a4a4a4;
   font-style: italic;
   line-height: 1.2;
 }
@@ -257,29 +262,366 @@ main {
   display: inline-block;
 }
 #article-image-banner figcaption {
-  color: #bcbcbc;
-  font-size: 80%;
+  color: #a4a4a4;
+  font-size: 90%;
   line-height: 1;
   font-style: italic;
 }
 @media (max-width: 599px) {
   #article-image-banner figcaption {
-    font-size: 70%;
+    font-size: 80%;
   }
 }
 #article-content h1 {
   font-weight: bold;
   font-size: 130%;
+  margin-top: 4%;
   margin-bottom: 4%;
 }
 #article-content h1::before {
   background-color: #084B7F;
   color: #084B7F;
   content: "\2013";
-  margin-right: 10px;
+  margin-right: 8px;
 }
 #article-content p {
-  margin-bottom: 4%;
+  margin-bottom: 2%;
+}
+#article-content ul {
+  margin-left: 10%;
+  margin-bottom: 2%;
+}
+#article-content ul li {
+  list-style: square;
+}
+#article-content a {
+  color: #0d75c7;
+}
+#article-content a:hover {
+  color: #85bce8;
+}
+#article-content figure {
+  margin: 3.5% 0;
+}
+#article-content figure img {
+  max-width: 100%;
+}
+#article-content figure figcaption {
+  color: #a4a4a4;
+  font-size: 90%;
+  line-height: 1;
+  font-style: italic;
+}
+#article-content .code {
+  background-color: #d7d7d7;
+  padding: 2px 5px;
+  font-family: monospace;
+}
+.highlight-custom {
+  margin: 3.5% 0 3.5% -8.82352941%;
+  font-family: monospace;
+  line-height: 1.4;
+  width: 117.64705882%;
+}
+.highlight-custom pre {
+  padding: 15px;
+  white-space: pre;
+  overflow: auto;
+}
+.highlight-custom pre::-webkit-scrollbar {
+  width: 0.75em;
+  height: 0.75em;
+}
+.highlight-custom pre::-webkit-scrollbar-track {
+  background: none;
+}
+.highlight-custom pre::-webkit-scrollbar-thumb {
+  background-color: #666666;
+}
+@media (min-width: 599px) {
+  .highlight-custom {
+    margin: 3.5% 0 3.5% -21.42857143%;
+    width: 142.85714286%;
+  }
+}
+@media (min-width: 900px) {
+  .highlight-custom {
+    margin: 3.5% 0;
+    width: auto;
+  }
+}
+.highlight-custom::before {
+  display: block;
+  background-color: #084B7F;
+  padding: 6px 15px;
+  color: #f1f1f1;
+}
+@media (min-width: 599px) {
+  #article-content h1 {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+  }
+}
+.highlight-custom.html::before {
+  content: 'html';
+}
+.highlight-custom.css::before {
+  content: 'css';
+}
+.highlight-custom.mathematica::before {
+  content: 'mathematica';
+}
+.highlight-custom.c::before {
+  content: 'c';
+}
+.highlight-custom.cpp::before {
+  content: 'c++';
+}
+.highlight-custom.cuda::before {
+  content: 'cuda';
+}
+.highlight-custom.docker::before {
+  content: 'docker';
+}
+.highlight-custom.ini::before {
+  content: '.ini';
+}
+.highlight-custom.nginx::before {
+  content: 'nginx';
+}
+.highlight-custom.less::before {
+  content: 'less';
+}
+.highlight-custom.sass::before {
+  content: 'sass';
+}
+.highlight-custom.scss::before {
+  content: 'scss';
+}
+.highlight-custom.json::before {
+  content: 'json';
+}
+.highlight-custom.yaml::before {
+  content: 'yaml';
+}
+.highlight-custom.csharp::before {
+  content: 'c#';
+}
+.highlight-custom.fsharp::before {
+  content: 'f#';
+}
+.highlight-custom.vbnet::before {
+  content: 'vb.net';
+}
+.highlight-custom.puppet::before {
+  content: 'puppet';
+}
+.highlight-custom.elm::before {
+  content: 'elm';
+}
+.highlight-custom.elixir::before {
+  content: 'elixir';
+}
+.highlight-custom.erlang::before {
+  content: 'erlang';
+}
+.highlight-custom.forth::before {
+  content: 'forth';
+}
+.highlight-custom.fortranfixed::before {
+  content: 'fortan';
+}
+.highlight-custom.fortran::before {
+  content: 'fortan';
+}
+.highlight-custom.go::before {
+  content: 'go';
+}
+.highlight-custom.abnf::before {
+  content: 'abnf';
+}
+.highlight-custom.bnf::before {
+  content: 'bnf';
+}
+.highlight-custom.postscript::before {
+  content: 'postscript';
+}
+.highlight-custom.agda::before {
+  content: 'agda';
+}
+.highlight-custom.haskell::before {
+  content: 'haskell';
+}
+.highlight-custom.idris::before {
+  content: 'idris';
+}
+.highlight-custom.haxe::before {
+  content: 'haxe';
+}
+.highlight-custom.hexdump::before {
+  content: 'hexdump';
+}
+.highlight-custom.haml::before {
+  content: 'haml';
+}
+.highlight-custom.xml::before {
+  content: 'xml';
+}
+.highlight-custom.xslt::before {
+  content: 'xslt';
+}
+.highlight-custom.coffeescript::before {
+  content: 'coffeescript';
+}
+.highlight-custom.dart::before {
+  content: 'dart';
+}
+.highlight-custom.javascript::before {
+  content: 'javascript';
+}
+.highlight-custom.livescript::before {
+  content: 'livescript';
+}
+.highlight-custom.typescript::before {
+  content: 'typescript';
+}
+.highlight-custom.julia::before {
+  content: 'julia';
+}
+.highlight-custom.clojure::before {
+  content: 'clojure';
+}
+.highlight-custom.groovy::before {
+  content: 'groovy';
+}
+.highlight-custom.java::before {
+  content: 'java';
+}
+.highlight-custom.kotlin::before {
+  content: 'kotlin';
+}
+.highlight-custom.pig::before {
+  content: 'pig';
+}
+.highlight-custom.scala::before {
+  content: 'scala';
+}
+.highlight-custom.lisp::before {
+  content: 'lisp';
+}
+.highlight-custom.scheme::before {
+  content: 'scheme';
+}
+.highlight-custom.basemake::before {
+  content: 'make';
+}
+.highlight-custom.cmake::before {
+  content: 'cmake';
+}
+.highlight-custom.make::before {
+  content: 'make';
+}
+.highlight-custom.bbcode::before {
+  content: 'bbcode';
+}
+.highlight-custom.md::before {
+  content: 'markdown';
+}
+.highlight-custom.restructuredtext::before {
+  content: 'restructured text';
+}
+.highlight-custom.latex::before {
+  content: 'latex';
+}
+.highlight-custom.matlab::before {
+  content: 'matlab';
+}
+.highlight-custom.octave::before {
+  content: 'octave';
+}
+.highlight-custom.ocaml::before {
+  content: 'ocaml';
+}
+.highlight-custom.sml::before {
+  content: 'sml';
+}
+.highlight-custom.objectivec::before {
+  content: 'objectivec';
+}
+.highlight-custom.swift::before {
+  content: 'swift';
+}
+.highlight-custom.ebnf::before {
+  content: 'ebnf';
+}
+.highlight-custom.ada::before {
+  content: 'ada';
+}
+.highlight-custom.delphi::before {
+  content: 'delphi';
+}
+.highlight-custom.perl::before {
+  content: 'perl';
+}
+.highlight-custom.php::before {
+  content: 'php';
+}
+.highlight-custom.python::before {
+  content: 'python';
+}
+.highlight-custom.python3::before {
+  content: 'python';
+}
+.highlight-custom.ruby::before {
+  content: 'ruby';
+}
+.highlight-custom.rust::before {
+  content: 'rust';
+}
+.highlight-custom.lua::before {
+  content: 'lua';
+}
+.highlight-custom.bash::before {
+  content: 'bash';
+}
+.highlight-custom.powershell::before {
+  content: 'powershell';
+}
+.highlight-custom.tcsh::before {
+  content: 'tcsh';
+}
+.highlight-custom.smalltalk::before {
+  content: 'smalltalk';
+}
+.highlight-custom.text::before {
+  content: 'text';
+}
+.highlight-custom.sql::before {
+  content: 'sql';
+}
+.highlight-custom.tsql::before {
+  content: 'tsql';
+}
+.highlight-custom.tcl::before {
+  content: 'tcl';
+}
+.highlight-custom.ng2::before {
+  content: 'angular';
+}
+.highlight-custom.gherkin::before {
+  content: 'gherkin';
+}
+.highlight-custom.awk::before {
+  content: 'awk';
+}
+.highlight-custom.vim::before {
+  content: 'vim';
+}
+.highlight-custom.http::before {
+  content: 'http';
+}
+.highlight-custom.coq::before {
+  content: 'coq';
 }
 #recent-posts h1 {
   text-align: center;
@@ -325,7 +667,7 @@ main {
   padding: 2% 6%;
   text-align: center;
   background-color: #084B7F;
-  color: #fff;
+  color: #f1f1f1;
   position: absolute;
   top: 0;
   right: 0;
@@ -338,6 +680,7 @@ main {
 }
 .listing-container {
   margin-top: 7.5%;
+  font-size: 20px;
 }
 .post-listing-img-wrapper {
   position: relative;
@@ -383,7 +726,7 @@ main {
   margin-top: 2%;
 }
 .post-listing-read-more:hover {
-  background-color: #f0f0f0;
+  background-color: #e4e4e4;
 }
 .post-listing-divider:not(:last-of-type) {
   background-color: #084B7F;
@@ -403,7 +746,7 @@ main {
 .pagination-button {
   background-color: #084B7F;
   text-decoration: none;
-  color: #fff;
+  color: #f1f1f1;
   padding: 0.5em 1em;
   vertical-align: middle;
 }

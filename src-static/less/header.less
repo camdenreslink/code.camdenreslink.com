@@ -1,18 +1,22 @@
+#page-header {
+    font-size: 20px;
+}
+
 #primary-nav {
     background-color: @primary-color;
-    padding: 0 @desktop-gutter-size;
+    padding: 0 percentage(@desktop-gutter-size);
 }
 
 #logo {
     a {
-        color: #FFFFFF;
+        color: @light-color;
         line-height: 2.5;
     }
 }
 
 #logo .cursor-white:after {
-    background-color: #FFFFFF;
-    color: #FFFFFF;
+    background-color: @light-color;
+    color: @light-color;
     content: "\2013";
 }
 
@@ -28,7 +32,7 @@
             background-color: @primary-color;
 
             a {
-                color: #FFFFFF;
+                color: @light-color;
             }
         }
 
@@ -52,7 +56,7 @@
 
 @media @for-phone-only {
     #primary-nav {
-        padding: 0 @mobile-gutter-size;
+        padding: 0 percentage(@mobile-gutter-size);
     }
     
     #secondary-nav {

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="twoColumnLayoutRight.svg"
+   inkscape:export-filename="C:\camden\git\code.camdenreslink.com\content\misc\getting-started-with-the-hugo-static-site-generator\img\twoColumnLayoutRight.png"
+   inkscape:export-xdpi="106.1"
+   inkscape:export-ydpi="106.1">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="274.31625"
+     inkscape:cy="496.4636"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1536"
+     inkscape:window-height="801"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4485"
+       width="154.21428"
+       height="188.9881"
+       x="29.70892"
+       y="52.902966" />
+    <g
+       id="g4560">
+      <rect
+         y="55.842926"
+         x="34.43362"
+         height="16.22611"
+         width="144.76488"
+         id="rect4497"
+         style="fill:none;fill-opacity:1;stroke:#ff2a4c;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4491-3"
+         y="67.952248"
+         x="37.873924"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:11.28888893px;stroke-width:0.26458332"
+           y="67.952248"
+           x="37.873924"
+           id="tspan4489-6"
+           sodipodi:role="line">Header Nav</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="52.087967"
+       y="234.54253"
+       id="text4491-60"><tspan
+         sodipodi:role="line"
+         id="tspan4489-67"
+         x="52.087967"
+         y="234.54253"
+         style="font-size:11.28888893px;stroke-width:0.26458332">TWO COLUMN LAYOUT</tspan></text>
+    <g
+       id="g4555"
+       transform="translate(0.96382332)">
+      <rect
+         y="77.101311"
+         x="90.147339"
+         height="143.2451"
+         width="87.3125"
+         id="rect4487"
+         style="fill:none;fill-opacity:1;stroke:#2a2cff;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4491"
+         y="92.892883"
+         x="123.64828"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:11.28888893px;stroke-width:0.26458332"
+           y="92.892883"
+           x="123.64828"
+           id="tspan4489"
+           sodipodi:role="line">Title</tspan></text>
+      <text
+         id="text4495"
+         y="123.20662"
+         x="109.39123"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="123.20662"
+           x="109.39123"
+           id="tspan4493"
+           sodipodi:role="line">Content goes here</tspan></text>
+      <rect
+         y="77.54969"
+         x="34.244633"
+         height="142.64459"
+         width="49.349659"
+         id="rect4497-1"
+         style="fill:none;fill-opacity:1;stroke:#ff2a4c;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4491-3-2"
+         y="90.922417"
+         x="37.831894"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:11.28888893px;stroke-width:0.26458332"
+           y="90.922417"
+           x="37.831894"
+           id="tspan4489-6-7"
+           sodipodi:role="line">Sidebar </tspan><tspan
+           id="tspan4544"
+           style="font-size:11.28888893px;stroke-width:0.26458332"
+           y="105.03353"
+           x="37.831894"
+           sodipodi:role="line">Nav</tspan></text>
+    </g>
+  </g>
+</svg>

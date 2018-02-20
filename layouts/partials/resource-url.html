@@ -1,0 +1,10 @@
+<!---->{{ $original := .page.Resources.GetMatch (printf "%s*" .resource) }}<!--
+------>{{ if eq .imgProcCommand "Fit"}}<!--
+---------->{{ print ($original.Fit .imgProcOptions).Permalink }}<!--
+------>{{ else if eq .imgProcCommand "Resize"}}<!--
+---------->{{ print ($original.Resize .imgProcOptions).Permalink }}<!--
+------>{{ else if eq .imgProcCommand "Fill"}}<!--
+---------->{{ print ($original.Fill .imgProcOptions).Permalink }}<!--
+------>{{ else }}<!--
+---------->{{ errorf "Invalid image processing command: Must be one of Fit, Fill or Resize."}}<!--
+------>{{ end }}<!-- HTML comments required to remove whitespace from partial result  -->
