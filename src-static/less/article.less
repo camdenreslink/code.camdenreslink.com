@@ -84,11 +84,11 @@
 
 @media @for-tablet-landscape-up {
     #article-content {
-        width: 72%;
+        width: 62%;
     }
     
     #recent-posts {
-        width: 28%;
+        width: 38%;
         padding-left: 4%;
         display: inline-block;
     }
@@ -151,8 +151,19 @@
     margin-bottom: 2%;
     li {
         list-style: square;
+        padding-left: 2%;
     }
 }
+
+#article-content ol {
+    margin-left: 10%;
+    margin-bottom: 2%;
+    li {
+        list-style: decimal;
+        padding-left: 2%;
+    }
+}
+
 
 #article-content a {
     color: @article-link-color;
@@ -176,10 +187,11 @@
     }
 }
 
-#article-content .code {
+// only match inline code snippets. Not pygments generated code blocks.
+#article-content code:not([class^="language-"]) {
     background-color: darken(@hover-background-color, 5%);
     padding: 2px 5px;
-    font-family: monospace;
+    font-family: 'Source Code Pro', monospace;
 }
 
 @code-padding: 15px;
@@ -188,7 +200,7 @@
     @desktop-gutter-offset: @desktop-gutter-size / (1 - 2 * @desktop-gutter-size);
 
     margin: 3.5% 0 3.5% percentage(-1 * @mobile-gutter-offset);
-    font-family: monospace;
+    font-family: 'Source Code Pro', monospace;
     line-height: 1.4;
     width: percentage(1 + 2 * @mobile-gutter-offset);
 

@@ -1,6 +1,10 @@
+html {
+  -webkit-text-size-adjust: 100%;
+  /* Prevent font scaling in landscape while allowing user zoom */
+}
 body {
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.6;
   text-decoration: none;
   font-weight: normal;
   color: #3c3c3c;
@@ -245,10 +249,10 @@ main {
 }
 @media (min-width: 900px) {
   #article-content {
-    width: 72%;
+    width: 62%;
   }
   #recent-posts {
-    width: 28%;
+    width: 38%;
     padding-left: 4%;
     display: inline-block;
   }
@@ -293,6 +297,15 @@ main {
 }
 #article-content ul li {
   list-style: square;
+  padding-left: 2%;
+}
+#article-content ol {
+  margin-left: 10%;
+  margin-bottom: 2%;
+}
+#article-content ol li {
+  list-style: decimal;
+  padding-left: 2%;
 }
 #article-content a {
   color: #0d75c7;
@@ -312,14 +325,14 @@ main {
   line-height: 1;
   font-style: italic;
 }
-#article-content .code {
+#article-content code:not([class^="language-"]) {
   background-color: #d7d7d7;
   padding: 2px 5px;
-  font-family: monospace;
+  font-family: 'Source Code Pro', monospace;
 }
 .highlight-custom {
   margin: 3.5% 0 3.5% -8.82352941%;
-  font-family: monospace;
+  font-family: 'Source Code Pro', monospace;
   line-height: 1.4;
   width: 117.64705882%;
 }

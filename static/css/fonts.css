@@ -21,3 +21,8 @@
     font-weight: bold;
     font-style: italic;
 }
+
+@font-face {
+    font-family: "Source Code Pro";
+    src: url("/fonts/SourceCodePro-Regular.otf.woff");
+}

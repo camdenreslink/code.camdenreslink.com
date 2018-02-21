@@ -53,3 +53,11 @@ table {
     color: inherit;
     text-decoration: inherit;
 }
+
+strong, b {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
