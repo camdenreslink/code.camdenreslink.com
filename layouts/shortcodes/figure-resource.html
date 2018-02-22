@@ -11,6 +11,7 @@
 {{ $class := .Get "class" }}
 {{ $height := .Get "height" }}
 {{ $width := .Get "width" }}
+{{ $hasShadow := .Get "hasShadow" }}
 
 {{if .Get "imgProcCommand"}}
     {{ .Scratch.Add "resourceUrl" (partial "resource-url.html" (dict "page" .Page "resource" $resource "imgProcCommand" $imgProcCommand "imgProcOptions" $imgProcOptions)) }}
@@ -20,7 +21,7 @@
 
 <figure{{ with $class }} class="{{ . }}"{{ end }}>
     {{ with $link }}<a href="{{ . }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ end }}
-        <img src="{{ .Scratch.Get "resourceUrl" }}"{{ with $alt }} alt="{{ . }}"{{ end }}{{ with $title }} title="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}{{ with $width }} width="{{ . }}"{{ end }}>
+        <img src="{{ .Scratch.Get "resourceUrl" }}"{{ with $alt }} alt="{{ . }}"{{ end }}{{ with $title }} title="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}{{ with $width }} width="{{ . }}"{{ end }}{{ with $hasShadow }} class="box-shadow"{{ end }}>
     {{ with $link }}</a>{{ end }}
     {{ with $caption }}
         <figcaption>

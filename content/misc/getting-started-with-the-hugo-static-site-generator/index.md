@@ -8,13 +8,9 @@ date = "2018-02-16"
 Motivation
 ==========
 
-There are already thousands (millions?) of technology and programming blogs out there, so why would anybody add to this already enormous pile of material? What could they possibly hope to contribute, that hasn't already been detailed in a blog post by somebody else? Isn't it a bit presumptuous to believe that you have ideas to communicate that other people will find interesting?
+My primary motivation for creating a blog is to document new topics as I learn them. In the past, I've spent hours exploring a framework or writing a proof of concept to satisfy my curiosity, but these efforts weren't documented anywhere. As a result they have been lost to the sands of time, locked into hard drives that have long since been recycled and disposed of.
 
-Luckily, all of the self-doubt in the previous paragraph is misplaced because programming is a huge discipline. For every topic that has been covered in a blog post, there are ten more that have not been. Programming is also a creative activity (in the sense that something is created at the end of the process). This means that new topics to write about are being invented every day. Nobody would criticize a novel writer by saying, "Aren't there already enough novels out there?".
-
-My primary motivation for writing a blog is to document new topics as I learn them. In the past, I would spend hours exploring a framework or writing a small proof of concept to satisfy my curiosity. However, because these efforts weren't documented anywhere they have been lost to the sands of time, locked into hard drives that have long since been recycled and disposed of.
-
-In this post, I will document the process of creating this blog. I will not give step-by-step instructions (these can be found within the [Hugo Documentation](https://gohugo.io/documentation/)). Instead, I will be highlighting my overall thought process and some gotchas I ran into along the way.
+In this post, I will document the process of creating this blog (the final product can be seen [here](https://github.com/camdenreslink/code.camdenreslink.com)). I will not be giving step-by-step instructions (these can be found within the [Hugo Documentation](https://gohugo.io/documentation/)). Instead, I will be highlighting my overall thought process and some gotchas I ran into along the way. This blog was created using the Windows 64-bit version of Hugo. Installation instructions can be found [here](https://gohugo.io/getting-started/installing/).
 
 Researching Existing Blogs
 ==========================
@@ -31,37 +27,49 @@ Here are some blogs/websites that I researched:
                     imgProcCommand="Resize" 
                     imgProcOptions="600x" 
                     link="https://www.hanselman.com/blog/"
-                    caption="Scott Hanselman's Blog" >}}
+                    caption="Scott Hanselman's Blog"
+                    class="figures-two-wide"
+                    hasShadow="true" >}}
 
 {{< figure-resource resource="img/screenshot_codeschool.png" 
                     imgProcCommand="Resize" 
                     imgProcOptions="600x" 
                     link="https://www.codeschool.com/blog/"
-                    caption="Code School's Blog" >}}
+                    caption="Code School's Blog"
+                    class="figures-two-wide"
+                    hasShadow="true" >}}
 
 {{< figure-resource resource="img/screenshot_cleancoder.png" 
                     imgProcCommand="Resize" 
                     imgProcOptions="600x" 
                     link="http://blog.cleancoder.com/"
-                    caption="The Clean Code Blog" >}}
+                    caption="The Clean Code Blog"
+                    class="figures-two-wide"
+                    hasShadow="true" >}}
 
 {{< figure-resource resource="img/screenshot_csstricks.png" 
                     imgProcCommand="Resize" 
                     imgProcOptions="600x" 
                     link="https://css-tricks.com/"
-                    caption="CSS Tricks" >}}
+                    caption="CSS Tricks"
+                    class="figures-two-wide"
+                    hasShadow="true" >}}
 
 {{< figure-resource resource="img/screenshot_nautilus.png" 
                     imgProcCommand="Resize" 
                     imgProcOptions="600x" 
                     link="http://nautil.us/blog"
-                    caption="Nautilus Blog" >}}
+                    caption="Nautilus Blog"
+                    class="figures-two-wide"
+                    hasShadow="true" >}}
 
 {{< figure-resource resource="img/screenshot_hackernews.png" 
                     imgProcCommand="Resize" 
                     imgProcOptions="600x" 
                     link="https://news.ycombinator.com/"
-                    caption="Hacker News" >}}
+                    caption="Hacker News"
+                    class="figures-two-wide"
+                    hasShadow="true" >}}
 
 I really admire the simplicity of Robert C. Martin's blog and the Hacker News website. The lack of extraneous design elements allows the reader to focus on the content rather than images, social buttons, and sticky nav bars. Another takeaway, was that I really enjoyed the banner images at the top of posts for the Code School and Nautilus blogs.
 
@@ -74,7 +82,7 @@ I chose to take the approach of first designing a static demo webpage to act as 
 
 Of the blogs that I researched, I liked the layout of the Nautilus blog the best, so I tried to replicate their two column layout (if you compare my page structure to theirs, it is very similar). When trying to implement this layout, I found the [Learn CSS Layout](http://learnlayout.com/) website to be very helpful. Here is some pseudo-code of my blog post layout (this is for a two column layout with the content on the left):
 
-{{< highlight-custom html >}}
+{{< highlight-custom language="html" >}}
 <header></header>
 <main>
     <article>
@@ -85,7 +93,7 @@ Of the blogs that I researched, I liked the layout of the Nautilus blog the best
 <footer></footer>
 {{< /highlight-custom >}}
 
-{{< highlight-custom css >}}
+{{< highlight-custom language="css" >}}
 main {
     padding: 0 15%;
 }
@@ -147,17 +155,205 @@ I find that Hugo strikes a nice balance between keeping things simple, while pro
 Translating My Static Templates Into a Blog Engine
 ==================================================
 
-At this point in the process, I had two html files with the exact layouts I wanted for my blog. Dummy Lorem Ipsum content was filled in, and all of the CSS was crammed into a `style` tag in the `head`.
+At this point in the process, I had two html files with the exact layouts I wanted for my blog. Dummy Lorem Ipsum content was filled in, and all of the CSS was crammed into a `style` tag in the `head`. Now I needed to turn these templates into something that Hugo could understand, enabling me to write real blog posts. Here is a simplified version of those steps:
+{{< highlight-custom language="text" header-text="command line" >}}
+mkdir code.camdenreslink.com
+hugo new site code.camdenreslink.com
+{{< /highlight-custom >}}
+
+The `hugo new site` command automatically scaffolds a new Hugo site for you (as the name implies). The resulting directory structure looks like the following:
+
+{{< highlight-custom language="text" header-text="directory" >}}
+code.camdenreslink.com/
+├── archetypes/
+│   ├── default.md
+├── content/
+├── data/
+├── layouts/
+├── static/
+├── themes/
+└── config.toml
+{{< /highlight-custom >}}
+
+The next step is to create the default layouts for a blog post and list of blog posts. In Hugo, these site-wide default template files go in the `\layouts\_default` directory.
+{{< highlight-custom language="text" header-text="command line" >}}
+cd layouts && mkdir _default
+{{< /highlight-custom >}}
+
+Then, create the two template files:
+{{< highlight-custom language="text" header-text="directory" >}}
+code.camdenreslink.com/
+└── layouts/
+    └── _default/
+        ├── list.html
+        └── single.html
+{{< /highlight-custom >}}
+
+Here is a very basic idea of what each file might contain:
+
+{{< highlight-custom language="html" header-text="single.html" >}}
+<!doctype html>
+<html lang="en">
+    {{ partial "head.html" . }}
+    <body>
+        {{ partial "navbar.html" . }}
+        <main>
+            <article>
+                <h1>{{ .Title }}</h1>
+                {{ .Content }}
+            </article>
+        </main>
+        {{ partial "footer.html" . }}
+    </body>
+</html>
+{{< /highlight-custom >}}
+
+{{< highlight-custom language="html" header-text="list.html" >}}
+<html lang="en">
+    {{ partial "head.html" . }}
+    <body>
+        {{ partial "navbar.html" . }}
+        <main>
+            {{ range .Paginator.Pages }}
+                <article>
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    <p>{{ .Summary }}</p>
+                </article>
+            {{ end }}
+            <nav>
+                {{ if .Paginator.HasPrev }}
+                    <a href="{{ .Paginator.Prev.URL }}">PREV</a>
+                {{ end }}
+                {{ if .Paginator.HasNext }}
+                    <a href="{{ .Paginator.Next.URL }}">NEXT</a>
+                {{ end }}
+            </nav>
+        </main>
+        {{ partial "footer.html" . }}
+    </body>
+</html>
+{{< /highlight-custom >}}
+
+Wait a second! What is with the curly braces and calls to this thing called `partial`? Hugo uses the templating library that is part of Go's standard library (Check out the Hugo templating docs [here](https://gohugo.io/templates/introduction/)). The double curly braces are how Go injects dynamic content into a template. For example `{{ .Title }}` in `list.html` will get replaced with the blog post's actual title when Hugo's compiler is run and the content is combined with the templates. The `partial` calls are a way to reuse html snippets in multiple Hugo templates (keeping our layout code DRY). We want the same navbar and footer on every page, so we define those in partials. Assuming we've added the partials required for the above templates, our directory structure will look like the following:
+{{< highlight-custom language="text" header-text="directory" >}}
+code.camdenreslink.com/
+└── layouts/
+    ├── _default/
+    │   ├── list.html
+    │   └── single.html
+    └── partials
+        ├── head.html
+        ├── navbar.html
+        └── footer.html
+{{< /highlight-custom >}}
+
+Remember how I said that I had my css crammed into the `head` of the static templates that I had created to work out my desired layout? At this point in the process, I just copied and pasted those styles into a file called `styles.css`. In Hugo, anything that is going to be static (images, css, javascript, fonts, etc.) is stored in the `static/` directory like so:
+
+{{< highlight-custom language="text" header-text="directory" >}}
+code.camdenreslink.com/
+└── static/
+    └── css/
+        └── styles.css
+{{< /highlight-custom >}}
+
+Now I can refer to that in my html templates using `<link href="/css/styles.css" rel="stylesheet">`.
+
+Creating Content and Testing Locally
+====================================
+
+Let's assume that I've divided my templates into logical partials that follow the look and feel of my original templates. This means we're ready for content. Separating content from layout is one of the best features of a static site generator. You don't need to rewrite all of the html markup for every page you create (like in a purely static site). Hugo takes care of that for you, and allows you to focus on writing your posts.
+
+The content of Hugo blog posts is stored within the `content/` directory as Markdown files. Top level directories within the `content/` directory are considered to be sections by Hugo. Sections get their own list page (using the `list.html` template we created before), and act as a way to group together similar posts. My blog has 4 sections (data, dev, math and misc), so the directory structure looks like:
+
+{{< highlight-custom language="text" header-text="directory" >}}
+code.camdenreslink.com/
+└── content/
+    ├── data/
+    ├── dev/
+    ├── math/
+    └── misc/
+{{< /highlight-custom >}}
+
+In the old way of doing things (pre-0.32 Hugo), you would place your .md files directly in these section directories. The only downside to this approach, is that images need to be placed in your `static/` directory. This is far away from your markdown post within your source tree, which is inconvenient. In Hugo 0.32, the concept of *bundles* were introduced. You create a bundle, by creating a directory (not just a markdown file) for your blog post as a subdirectory of the section directory. Within this bundle, you create an index.md file. This file acts as your blog post. You can then place images and other resources within the bundle directory, colocating all of your material for a blog post. You no longer have to hunt around your Hugo project to find a relevant file. [Here](https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/) is an excellent blog post describing bundling and how to use Page Resources in Hugo (it's a pretty new feature, and documentation is lacking at the moment).
+
+Create a bundle with a blog post and an image within a section:
+
+{{< highlight-custom language="text" header-text="directory" >}}
+code.camdenreslink.com/
+└── content/
+    ├── data/
+    ├── dev/
+    ├── math/
+    └── misc/
+        └── misc-article-1
+            ├── img
+            │   └── misc-article-img.png
+            └── index.md
+{{< /highlight-custom >}}
+
+{{< highlight-custom language="md" header-text="index.md" >}}
++++
+title = "This is the First Misc Blog Post"
+date = "2018-02-22"
++++
+
+This is a Header
+----------------
+This is the blog post content. Fill this with Lorem Ipsum if you want more content.
+{{< /highlight-custom >}}
+
+The part at the top of the markdown file delimited by `+++` is called the front matter, and it uses the TOML format (it can use YAML or JSON as well). The front matter sets up variables and configuration used by the layout templates. 
+
+To view the page that we've created, enter the following command in the root of your Hugo project:
+
+{{< highlight-custom language="text" header-text="command line" >}}
+hugo server
+{{< /highlight-custom >}}
+
+This command compiles your site, and runs a local web server to serve the static pages that have been created. The page that we've created will be accessible via the url: [http://localhost:1313/misc/misc-article-1](http://localhost:1313/misc/misc-article-1).
+
+Creating a Hugo Shortcode
+=======================
+
+We still haven't used the image that we included in our bundle. In order to do this, we'll need to create a Hugo shortcode. Hugo is very strict about the separation of content and programmability/layout. You can't include any Go template syntax in your Markdown files. This means that you can't access any of the built-in variables or functions. Shortcodes are the way around this. They allow you to define small chunks of functionality that can enhance your Markdown. 
+
+Including resources on a page requires access to the [.Resources](https://gohugo.io/content-management/page-resources/) Page variable, so we need to create a shortcode to gain access to this behavior.
+
+{{< highlight-custom language="text" header-text="directory" >}}
+code.camdenreslink.com/
+└── layouts/
+    └── shortcodes/
+        └── imgproc.html
+{{< /highlight-custom >}}
+
+{{< highlight-custom language="html" header-text="imgproc.html" >}}
+{{ $image := .Page.Resources.GetMatch (printf "%s*" (.Get 0)) }}
+<img src="{{ $image.RelPermalink }}">
+{{< /highlight-custom >}}
+
+Now let's try including it on our page:
+
+{{< highlight-custom language="md" header-text="index.md" >}}
++++
+title = "This is the First Misc Blog Post"
+date = "2018-02-22"
++++
+
+{{</* imgproc "img/misc-article-img.png" */>}}
+
+This is a Header
+----------------
+This is the blog post content. Fill this with Lorem Ipsum if you want more content.
+{{< /highlight-custom >}}
+
+If your hugo server command from earlier is still running, you should be able to see an image on your page now.
 
 Setting up an Asset Pipeline
 ============================
 
-
+I also made my Hugo project a Node module by running `npm init`. I am using node to create thumbnail images as a build step. I also converted my large CSS file containing all my styles into more single purpose less style files. I am currently running these jobs manually using npm scripts (thumbnail generation and less compilation), but if more build steps are added in the future I will create a gulp file to organize my tasks.
 
 Deployment
 ==========
 
-
-
-Some Tricky Bits
-================
+Hugo is great because at the end of compilation, you just have static files to deploy. Any host that supports static file hosting and SSL works. You could even host using a web server like Nginx or Apache on a VPS like Digital Ocean. I chose to host on Firebase because it is easy to use, free, and it [performs well](https://www.savjee.be/2017/10/Static-website-hosting-who-is-fastest/). Hugo has a dedicated document on getting set up and deploying to Firebase [here](https://gohugo.io/hosting-and-deployment/hosting-on-firebase/).

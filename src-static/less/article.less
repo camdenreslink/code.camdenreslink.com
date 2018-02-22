@@ -175,6 +175,7 @@
 
 #article-content figure {
     margin: 3.5% 0;
+
     img {
         max-width: 100%;
     }
@@ -233,7 +234,7 @@
     }
 }
 
-.highlight-custom::before {
+.highlight-custom-header {
     display: block;
     background-color: @primary-color;
     padding: 6px @code-padding;
@@ -245,4 +246,17 @@
         margin-top: 2.5%;
         margin-bottom: 2.5%;
     }
+}
+
+#article-content .figures-two-wide {
+    @media @for-tablet-landscape-up {
+        display: inline-block;
+        vertical-align: top;
+        margin: 3.5% 5% 3.5% 0;
+        width: 42%;
+    }
+}
+
+.box-shadow {
+    box-shadow: 0.1em 0.1em 0.5em -0.2em @code-block-background-color;
 }

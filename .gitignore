@@ -1,5 +1,6 @@
 # Hugo default output directory
 /public
+/resources/_gen
 
 ## OS Files
 # Windows
@@ -15,3 +16,6 @@ $RECYCLE.BIN/
 .npm
 node_modules
 npm-debug.log*
+
+# VSCode
+.vscode
