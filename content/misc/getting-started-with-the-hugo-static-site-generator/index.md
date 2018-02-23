@@ -155,6 +155,8 @@ I find that Hugo strikes a nice balance between keeping things simple, while pro
 Translating My Static Templates Into a Blog Engine
 ==================================================
 
+Check out the example repository at [https://github.com/camdenreslink/simple-hugo-example](https://github.com/camdenreslink/simple-hugo-example). Clone the repository and follow along. The rest of the article will roughly follow the structure of that Hugo example. 
+
 At this point in the process, I had two html files with the exact layouts I wanted for my blog. Dummy Lorem Ipsum content was filled in, and all of the CSS was crammed into a `style` tag in the `head`. Now I needed to turn these templates into something that Hugo could understand, enabling me to write real blog posts. Here is a simplified version of those steps:
 {{< highlight-custom language="text" header-text="command line" >}}
 mkdir code.camdenreslink.com
