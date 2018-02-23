@@ -131,13 +131,24 @@ What is a Static Site Generator?
 
 Traditionally, when you want to create a website that merges data/content with templates to return a fully formed html page to the browser you use a server side language (python, ruby, C#, etc.). The HTTP request for a specific page from the browser hits the web server. A call then is made by the web server to retrieve the requested content from a SQL database. This content is then combined with a predefined template (Jinja, ERB, Razor, etc.) to generate an html file. This file is sent back to the browser and displayed. This is how WordPress works. It uses PHP as its server side language, and MySQL as its database to store content related to blog posts. If you just use the admin interface and install themes, you may never see those internal details.
 
-TODO: Insert diagram of client - server - db architecture. Rendering templates each call.
+{{< figure-resource resource="img/client-server-db.png" >}}
+
+1. A user's browser makes an HTTP request for a specific page on your blog.
+2. The web server locates the correct template and SQL query based on the requested page.
+3. The web server makes the SQL query.
+4. The data returned from the SQL database could include: post content, title, author, date, tags, etc.
+5. The web server combines the retrieved data with the template to form the HTML page that the user was looking for.
+6. The page is returned to the user, where it will be rendered by their browser.
 
 For some websites this setup is required because of the dynamic nature of the data and pages being rendered. In the case of a blog, it is total overkill. Performance can be improved by setting up different caching schemes (saving trips to the database and cpu-intensive template rendering calls), but it isn't worth it for a site that doesn't differentiate between users when serving content.
 
 An alternative approach is to use a *static site generator*. In this approach, you use a framework/application that runs on your local computer (not on a web server). This application combines templates with content files to create the html files for your website all at once. You then upload these static files to a web server. Now, when a browser makes an HTTP request for a specific web page, the web server just returns the file that was generated ahead of time. No database is even required (eliminating a huge dependency and reducing complexity considerably). Your hosting options become a lot cheaper as well, because you don't need to run any application code. You just need a host that can serve static files.
 
-TODO: Insert diagram of client - server architecture. Just serving static files.
+{{< figure-resource resource="img/client-server.png" >}}
+
+1. A user's browser makes an HTTP request for a specific page on your blog.
+2. The web server locates the correct HTML file that was already generated ahead of time by your static site generator.
+3. The page is returned to the user, where it will be rendered by their browser.
 
 Benefits of Hugo
 ================
@@ -293,7 +304,7 @@ code.camdenreslink.com/
             └── index.md
 {{< /highlight-custom >}}
 
-{{< highlight-custom language="md" header-text="index.md" >}}
+{{< highlight-custom language="md" header-text="index.md" options="nowrap=True" >}}
 +++
 title = "This is the First Misc Blog Post"
 date = "2018-02-22"
