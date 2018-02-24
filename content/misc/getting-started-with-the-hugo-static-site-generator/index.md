@@ -1,8 +1,9 @@
 +++
 title = "Getting Started with the Hugo Static Site Generator"
 subtitle = "How this Blog was Created"
-bannerFigCaption = "This fig caption should give attribution to banner image source."
-date = "2018-02-16"
+bannerFigCaption = "The Go gopher was designed by Renee French (http://reneefrench.blogspot.com/)."
+date = "2018-02-24"
+summary = "In this post, I will document the process of creating this blog. My primary motivation for creating a blog is to document new topics as I learn them. In the past, I've spent hours exploring a framework or writing a proof of concept to satisfy my curiosity, but these efforts weren't documented anywhere. As a result they have been lost to the sands of time, locked into hard drives that have long since been recycled and disposed of."
 +++
 
 Motivation
@@ -71,12 +72,12 @@ Here are some blogs/websites that I researched:
                     class="figures-two-wide"
                     hasShadow="true" >}}
 
-I really admire the simplicity of Robert C. Martin's blog and the Hacker News website. The lack of extraneous design elements allows the reader to focus on the content rather than images, social buttons, and sticky nav bars. Another takeaway, was that I really enjoyed the banner images at the top of posts for the Code School and Nautilus blogs.
+I really admire the simplicity of Robert C. Martin's blog and the Hacker News website. The lack of extraneous design elements allows the reader to focus on the content rather than images, social buttons, and sticky nav bars. Another takeaway was that I really enjoyed the banner images at the top of posts for the Code School and Nautilus blogs.
 
 Choosing (and Implementing) a Layout
 ====================================
 
-I chose to take the approach of first designing a static demo webpage to act as a template. Then, when I was satisfied with the look that was created, I translated and split up this template into something Hugo (my chosen blog engine) could handle. Hugo requires two types of pages: the page that displays a blog post, and the page that lists blog posts (based on section, tags, or category) to choose from. This first type is called a `single` page, and the second type is called a `list` page. So, to form the skeleton of my static template I had to choose a general layout for both. I decided to start with the `single` page template. I found that 99% of blogs out there fit into one of 3 categories: single column, two column with the content on the right, and two column with the content on the left:
+I chose to take the approach of first designing a static demo webpage to act as a template. Then, when I was satisfied with the look that was created, I translated and split up this template into something Hugo (my chosen blog engine) could handle. Hugo requires two types of pages: the page that displays a blog post, and the page that lists blog posts (based on section, tag, or category) to choose from. This first type is called a `single` page, and the second type is called a `list` page. So, to form the skeleton of my static template I had to choose a general layout for both. I decided to start with the `single` page template. I found that 99% of blogs out there fit into one of 3 categories: single column, two column with the content on the right, and two column with the content on the left:
 
 {{< figure-resource resource="img/layouts.png" >}}
 
@@ -129,15 +130,15 @@ For more suggestions on web typography, check out the following website: [webtyp
 What is a Static Site Generator?
 ================================
 
-Traditionally, when you want to create a website that merges data/content with templates to return a fully formed html page to the browser you use a server side language (python, ruby, C#, etc.). The HTTP request for a specific page from the browser hits the web server. A call then is made by the web server to retrieve the requested content from a SQL database. This content is then combined with a predefined template (Jinja, ERB, Razor, etc.) to generate an html file. This file is sent back to the browser and displayed. This is how WordPress works. It uses PHP as its server side language, and MySQL as its database to store content related to blog posts. If you just use the admin interface and install themes, you may never see those internal details.
+Traditionally, when you want to create a website that merges data/content with templates to return a fully formed html page to the browser, you use a server side language (python, ruby, C#, etc.). The HTTP request for a specific page from the browser hits the web server. A call is then made by the web server to retrieve the requested content from a SQL database. This content is then combined with a predefined template (Jinja, ERB, Razor, etc.) to generate an html file. This file is sent back to the browser and displayed. This is how WordPress works. It uses PHP as its server side language, and MySQL as its database to store content related to blog posts. If you just use the admin interface and install themes, you may never see those internal details.
 
 {{< figure-resource resource="img/client-server-db.png" >}}
 
 1. A user's browser makes an HTTP request for a specific page on your blog.
 2. The web server locates the correct template and SQL query based on the requested page.
-3. The web server makes the SQL query.
+3. The web server sends the query to the SQL database for execution.
 4. The data returned from the SQL database could include: post content, title, author, date, tags, etc.
-5. The web server combines the retrieved data with the template to form the HTML page that the user was looking for.
+5. The web server combines the retrieved data and template to form the HTML page that the user was looking for.
 6. The page is returned to the user, where it will be rendered by their browser.
 
 For some websites this setup is required because of the dynamic nature of the data and pages being rendered. In the case of a blog, it is total overkill. Performance can be improved by setting up different caching schemes (saving trips to the database and cpu-intensive template rendering calls), but it isn't worth it for a site that doesn't differentiate between users when serving content.
@@ -153,9 +154,9 @@ An alternative approach is to use a *static site generator*. In this approach, y
 Benefits of Hugo
 ================
 
-The most popular static site generator by far is [Jekyll](https://jekyllrb.com/). It is a great choice with a huge community and a lot of resources for learning. I chose to go with another static site generator, [Hugo](https://gohugo.io/), for my site for one reason: it compiles your website lightning fast. If you have a website with a lot of content, jekyll will take much longer than hugo to recompile all of your pages. This is not ideal if you want a REPL-like experience when blogging (update a file, check the browser to see how your changes look, rinse and repeat).
+The most popular static site generator by far is [Jekyll](https://jekyllrb.com/). It is a great choice with a huge community and a lot of resources for learning. I chose to go with another static site generator, [Hugo](https://gohugo.io/), for my site for one reason: it compiles your website lightning fast. If you have a website with a lot of content, Jekyll will take much longer than Hugo to recompile all of your pages. This is not ideal if you want a REPL-like experience when blogging (update a file, check the browser to see how your changes look, rinse and repeat).
 
-Despite Hugo having a smaller community that Jekyll, it has a fairly large community in its own right. It also has all of the features that you need to create a well organized blog:
+Hugo has all of the features that you need to create a well organized blog:
 
 * **Content (in Markdown files) separated from layout**, allowing you to focus on your content while authoring posts.
 * **Code reuse** via partials and shortcodes.
@@ -168,7 +169,7 @@ Translating My Static Templates Into a Blog Engine
 
 Check out the example repository at [https://github.com/camdenreslink/simple-hugo-example](https://github.com/camdenreslink/simple-hugo-example). Clone the repository and follow along. The rest of the article will roughly follow the structure of that Hugo example. 
 
-At this point in the process, I had two html files with the exact layouts I wanted for my blog. Dummy Lorem Ipsum content was filled in, and all of the CSS was crammed into a `style` tag in the `head`. Now I needed to turn these templates into something that Hugo could understand, enabling me to write real blog posts. Here is a simplified version of those steps:
+At this point in the process, I had two html files with the exact layouts I wanted for my blog. Dummy Lorem Ipsum content was filled in, and all of the CSS was crammed into a `style` tag in the `head`. I needed to turn these templates into something that Hugo could understand, enabling me to write real blog posts. Here is a simplified version of those steps:
 {{< highlight-custom language="text" header-text="command line" >}}
 mkdir code.camdenreslink.com
 hugo new site code.camdenreslink.com
@@ -276,7 +277,7 @@ Creating Content and Testing Locally
 
 Let's assume that I've divided my templates into logical partials that follow the look and feel of my original templates. This means we're ready for content. Separating content from layout is one of the best features of a static site generator. You don't need to rewrite all of the html markup for every page you create (like in a purely static site). Hugo takes care of that for you, and allows you to focus on writing your posts.
 
-The content of Hugo blog posts is stored within the `content/` directory as Markdown files. Top level directories within the `content/` directory are considered to be sections by Hugo. Sections get their own list page (using the `list.html` template we created before), and act as a way to group together similar posts. My blog has 4 sections (data, dev, math and misc), so the directory structure looks like:
+The content of Hugo blog posts is stored within the `content/` directory as Markdown files. Top level directories within the `content/` directory are considered to be *sections* by Hugo. Sections get their own list page (using the `list.html` template we created before), and act as a way to group together similar posts. My blog has 4 sections (data, dev, math and misc), so the directory structure looks like:
 
 {{< highlight-custom language="text" header-text="directory" >}}
 code.camdenreslink.com/
@@ -364,9 +365,9 @@ If your hugo server command from earlier is still running, you should be able to
 Setting up an Asset Pipeline
 ============================
 
-I also made my Hugo project a Node module by running `npm init`. I am using node to create thumbnail images as a build step. I also converted my large CSS file containing all my styles into more single purpose less style files. I am currently running these jobs manually using npm scripts (thumbnail generation and less compilation), but if more build steps are added in the future I will create a gulp file to organize my tasks.
+I also made my Hugo project a Node module by running `npm init`. I am using node to create thumbnail images as a build step. I also converted my large CSS file containing all my styles into more single purpose [less](http://lesscss.org/) style files. I am currently running these jobs manually using npm scripts (thumbnail generation and less compilation), but if more build steps are added in the future I will create a [gulp](https://gulpjs.com/) file to organize my tasks.
 
 Deployment
 ==========
 
-Hugo is great because at the end of compilation, you just have static files to deploy. Any host that supports static file hosting and SSL works. You could even host using a web server like Nginx or Apache on a VPS like Digital Ocean. I chose to host on Firebase because it is easy to use, free, and it [performs well](https://www.savjee.be/2017/10/Static-website-hosting-who-is-fastest/). Hugo has a dedicated document on getting set up and deploying to Firebase [here](https://gohugo.io/hosting-and-deployment/hosting-on-firebase/).
+Hugo is great because at the end of compilation, you just have static files to deploy. Any host that supports static file hosting and SSL works. You could even host using a web server like Nginx or Apache on a VPS like Digital Ocean. I chose to host on Firebase because it is easy to use, free (up to a certain amount of resources used), and it [performs well](https://www.savjee.be/2017/10/Static-website-hosting-who-is-fastest/). Hugo has a dedicated document on getting set up and deploying to Firebase [here](https://gohugo.io/hosting-and-deployment/hosting-on-firebase/).
