@@ -391,7 +391,6 @@ main {
   padding: 5%;
   font-size: 140%;
   font-weight: bold;
-  margin-bottom: 15%;
   white-space: nowrap;
 }
 #recent-posts h1::before {
@@ -417,6 +416,9 @@ main {
   position: relative;
   margin: 5% 0;
   padding: 10% 7.5%;
+}
+.recent-post:first-of-type {
+  padding-top: 5%;
 }
 .recent-post a {
   display: inline-block;

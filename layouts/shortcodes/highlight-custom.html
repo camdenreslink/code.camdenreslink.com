@@ -2,9 +2,9 @@
 <div class="highlight-custom">
         <div class="highlight-custom-header">
                 {{ if .Get "header-text" }}
-                        {{.Get "header-text"}}
+                        {{ safeHTML (replace (.Get "header-text") "\\" "\\<wbr>") }}
                 {{ else }}
-                        {{.Get "language"}}
+                        {{ .Get "language" }}
                 {{ end }}
         </div>
         {{ if .Get "options" }}

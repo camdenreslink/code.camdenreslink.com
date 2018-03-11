@@ -3,7 +3,6 @@
     padding: 5%;
     font-size: 140%;
     font-weight: bold;
-    margin-bottom: 15%;
     white-space: nowrap;
 }
 
@@ -38,9 +37,11 @@
     position: relative;
     margin: 5% 0;
     padding: 10% 7.5%;
-}
 
-.recent-post {
+    &:first-of-type { // This will break if any div that isn't a .recent-post is added as a child of #recent-posts
+        padding-top: 5%;
+    }
+
     a {
         display: inline-block;
         position: relative;
