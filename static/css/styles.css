@@ -399,6 +399,12 @@ main {
 .box-shadow {
   box-shadow: 0.1em 0.1em 0.5em -0.2em #272822;
 }
+.graph-container {
+  height: 300px;
+  background-color: #ebebeb;
+  border: solid 1px #e4e4e4;
+  margin: 3.5% 0;
+}
 #recent-posts h1 {
   text-align: center;
   padding: 5%;

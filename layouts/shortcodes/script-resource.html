@@ -1,0 +1,2 @@
+{{ $resource := .Get "resource" }}
+<script src={{ (.Page.Resources.GetMatch (printf "%s*" $resource)).Permalink }}></script>

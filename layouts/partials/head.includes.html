@@ -4,3 +4,8 @@
 <script src="/js/jquery.min.js" defer></script>
 <script src="/js/logo-blink.js" defer></script>
 <script src="/js/mobile-nav.js" defer></script>
+{{ if .Params.graphsIncluded }}
+    <script src="/js/cytoscape.min.js" defer></script>
+    <script src="/js/dagre.min.js" defer></script>
+    <script src="/js/cytoscape-dagre.min.js" defer></script>
+{{ end }}

@@ -1,0 +1,2 @@
+{{ $name := .Get "name" }}
+<div{{ with $name }} id="graph-container-{{ . }}"{{ end }} class="graph-container"></div>

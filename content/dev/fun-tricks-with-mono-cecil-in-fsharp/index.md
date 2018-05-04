@@ -5,9 +5,16 @@ bannerFigCaption = ""
 date = "2018-02-24"
 summary = "Static code analysis is the process of investigating the structure of a program without actually executing it (as opposed to things that happen at runtime like reflection, logging, running unit tests, or debugging). In this post, we'll be investigating interesting ways to leverage the Mono.Cecil library to analyze .NET projects."
 draft=true
+graphsIncluded=true
 +++
 
 *Disclaimer: Some of the things described in this post can probably be accomplished with the [.NET Compiler Platform (i.e. Roslyn)](https://github.com/dotnet/roslyn). I haven't had a chance to play around with that yet, so I use Mono.Cecil for similar tasks.*
+
+Preview
+=======
+
+By the end of this blog post, we'll be able to create cool [dependency graphs](https://en.wikipedia.org/wiki/Dependency_graph) based on our .NET classes like the following:
+{{< graph-container name="address" >}}
 
 Background
 ==========
@@ -18,9 +25,9 @@ Static code analysis is the process of investigating the structure of a program 
 
 CIL bytecode is what gets generated when you compile a .NET application. This bytecode then gets run using a CIL compatible runtime (.NET Framework, .NET Core, or Mono).
 
-TODO: Graph depicting Source File -> CIL Bytecode -> Runtime executing code on processor
+{{< figure-resource resource="img/source-bytecode-runtime.png" >}}
 
-If you've never seen CIL Bytecode before, try installing an extension for Visual Studio called [ILSpy](https://github.com/icsharpcode/ILSpy) (coincidentally, this tool was written using Mono.Cecil, the topic of this blog post). This tool will allow you to right click on a method or class in Visual Studio and select "Open code in ILSpy". A window will appear with the IL instructions that correspond to that method or class.
+If you've never seen CIL Bytecode before, try installing an extension for Visual Studio called [ILSpy](https://github.com/icsharpcode/ILSpy) (coincidentally, this tool was written using Mono.Cecil, the topic of this blog post). This tool will allow you to right click on a method or class in Visual Studio and select "Open code in ILSpy" from the context menu. A window will appear with the IL instructions that correspond to that method or class.
 
 {{< figure-resource resource="img/screenshot_ILSpy.png" >}}
 
@@ -46,13 +53,13 @@ To get our work environment set up, we need to complete the following steps:
 Setting Up Our Analyzer Project
 ===============================
 
-We will be using F# to do our analysis. I like to use F#, because it allows you to write in a functional style while providing nice integration with the .NET platform. This gives your F# code the ability to interop with libraries that were originally intended to be used with C#. An excellent source to learn more about F# is the [F# for Fun and Profit](https://fsharpforfunandprofit.com/site-contents/) website authored by Scott Wlaschin.
+We will be using F# to do our analysis. I like to use F#, because it allows you to write in a functional style while providing nice integration with the .NET platform. This gives your F# code the ability to interop with libraries that were originally intended to be used with C#. An excellent source to learn more about F# is the [F# for Fun and Profit](https://fsharpforfunandprofit.com/site-contents/) website authored by Scott Wlaschin (If you search his name on YouTube, he also has some great presentations available for viewing).
 
 Open Visual Studio, and select `File > New > Project`. Within the New Project window, navigate to the "Visual F#" section and select "Console Application". Choose a name and location for your project. I chose to name mine "Mono.Cecil_FunTricks". The paths in the rest of this post will assume this project name.
 
 {{< figure-resource resource="img/screenshot_NewProject.png" >}}
 
-*Note: If you don't already have F# language tools installed for Visual Studio, you'll have to do that. Within Visual Studio, go to `Tools > Get Tools and Features`. This will open the Visual Studio Installer window. Under the Individual Components tab, navigate to the Development Activities header and make sure "F# language support" is checked. Then click the "Modify" button located on the bottom right corner of the window. All Visual Studio windows need to be closed for the installer to work.*
+*Note: If you don't already have F# language tools installed for Visual Studio, you will have to do so. Within Visual Studio, go to `Tools > Get Tools and Features`. This will open the Visual Studio Installer window. Under the Individual Components tab, navigate to the Development Activities header and make sure "F# language support" is checked. Then click the "Modify" button located on the bottom right corner of the window. All Visual Studio windows need to be closed for the installer to work.*
 
 I will be using [Paket](https://fsprojects.github.io/Paket/) to manage my dependencies. To read more about the benefits of Paket, check out the [FAQ](https://fsprojects.github.io/Paket/faq.html). To set up Paket:
 
@@ -98,25 +105,18 @@ let main argv =
     0 (* return an integer exit code *)
 {{< /highlight-custom >}}
 
+*Note: F# is a whitespace-significant language. That means tabs/spaces need to be correct for the code to compile. To see your whitespace in Visual Studio, press `ctrl-r` + `ctrl-w`.*
+
 Now in Visual Studio, right click on the project `Mono.Cecil_FunTricks` in the Solution Explorer, and select Properties from the context menu. Navigate to `Debug > Start Options > Command line arguments:` and enter the following path into the text area: `{absolute path to the SmartStoreNET repository}\SmartStoreNET\src\Presentation\SmartStore.Web\bin\SmartStore.Web.dll`. Note: Make sure you fill in the path to the SmartStoreNET repository!
 
 Add a breakpoint within the main function, and debug. You should see a value if you hover over the assembly value. We are now successfully statically analyzing our sample assembly!
 
 {{< figure-resource resource="img/screenshot_QuickTest.png" >}}
 
-**The rest of this post will take the form of different types of analysis you can do using Mono.Cecil**
-
-Using Mono.Cecil as a Super-Charged Query Engine
-================================================
-
-During development, sometimes you have conditions in your head about some class you want to find in the codebase. Maybe you know something about its name, generic parameters, inheritance relationships, composition relationships, constructor signatures, etc. Sometimes the tools built in to Visual Studio or [ReSharper](https://www.jetbrains.com/resharper/) can't do exactly what is necessary to hunt down this mystery class. 
-
-Mono.Cecil is ultimately flexible in finding any class/property/method/etc in your code based on any conditions you can dream up (that are representable in IL). The only cost, that isn't present when using an out-of-the-box solution, is that you must actually code your query by hand.
-
 Some Plumbing Code
 ------------------
 
-In Mono.Cecil you must explicitly load all of the assemblies that you want to query the types of. This has to be done manually, but it is usually pretty easy because all of the assemblies you want to inspect all reside in the same bin directory. Add the following assembly loader module to your F# project:
+In Mono.Cecil you must explicitly load all of the assemblies that you want to query the types of. This has to be done manually, but it is usually pretty easy because all of the assemblies you want to inspect reside in the same bin directory (although sometimes you do have to hunt around for them, or load from the GAC). Add the following assembly loader module to your F# project:
 
 {{< highlight-custom language="fsharp" header-text="AssemblyLoader.fs" >}}
 module AssemblyLoader
@@ -135,7 +135,7 @@ let LoadAllAssembliesByPrefix prefix binDirectoryPath =
 
 *Note: AssemblyLoader.fs must be higher in your Solution Explorer than Program.fs and any other files that reference it. In F#, files must be in the correct order, and modules/functions/values can only be referenced if they've already been defined. Move a file in Visual Studio, by highlighting it in the Solution Explorer, and typing `alt-up` or `alt-down`*
 
-Now change our Program.fs to call the new assembly loading code. Change the debug command line argument to be the bin directory of the SmartStore.Web project (it was a specific assembly before).
+Now change our Program.fs to call the new assembly loading code.
 {{< highlight-custom language="fsharp" header-text="Program.fs" >}}
 open Mono.Cecil
 
@@ -149,15 +149,39 @@ let main argv =
                         |> Array.filter (fun a -> 
                             a.MainModule.Name <> "SmartStore.Licensing.dll")
 
+    (* Write to the console to test our assembly loading code! *)
+    assemblies 
+        |> Array.map (fun a -> a.MainModule.Name)
+        |> Array.iter Console.WriteLine
+
     0 (* return an integer exit code *)
+{{< /highlight-custom >}}
+
+Change the debug command line argument to be the bin directory of the SmartStore.Web project (it was a specific assembly before): `{absolute path to the SmartStoreNET repository}\SmartStoreNET\src\Presentation\SmartStore.Web\bin\`. You should get the following output when debugging your program:
+{{< highlight-custom language="text" header-text="Console Output" >}}
+SmartStore.Admin.dll
+SmartStore.Core.dll
+SmartStore.Data.dll
+SmartStore.Services.dll
+SmartStore.Web.dll
+SmartStore.Web.Framework.dll
 {{< /highlight-custom >}}
 
 We can now start iterating through these loaded assemblies, and finding our desired Types.
 
-Find All Classes Implementing Some Interface
+**The rest of this post will take the form of different types of analysis you can do using Mono.Cecil.**
+
+Using Mono.Cecil as a Super-Charged Query Engine
+================================================
+
+During development, sometimes you have conditions in your head about some class you want to find in the codebase. Maybe you know something about its name, generic parameters, inheritance relationships, composition relationships, constructor signatures, etc. Sometimes the tools included with Visual Studio or [ReSharper](https://www.jetbrains.com/resharper/) can't do exactly what is necessary to hunt down this mystery class. 
+
+Mono.Cecil is ultimately flexible in finding any class/property/method/etc in your code based on any conditions you can dream up (given that they are representable in IL, or can be inferred from the IL). The primary cost, is that you must write these queries by hand. An out-of-the-box solution might have your query already baked in.
+
+Find All Types Implementing Some Interface
 --------------------------------------------
 
-We'll start out with a simple example. Let's find all classes that exist in our assemblies that implement the IDisposable interface. We'll create another file to contain all of our custom queries. Add the following file to your solution:
+We'll start out with a simple example. Let's find all classes and interfaces that implement the IDisposable interface in our assemblies. We'll create another file to contain our custom queries. Add the following file to your solution:
 {{< highlight-custom language="fsharp" header-text="AssemblyQueries.fs" >}}
 module AssemblyQueries
 
@@ -171,7 +195,7 @@ let FindAllTypesImplementingInterface interfaceFullName (assembly: AssemblyDefin
                                     i.FullName = interfaceFullName))
 {{< /highlight-custom >}}
 
-We can now add calling code to the main program:
+We can now add the call to the disposable type querying code to the main program:
 {{< highlight-custom language="fsharp" header-text="Program.fs" >}}
 open Mono.Cecil
 
@@ -189,13 +213,39 @@ let main argv =
     let disposableTypes = assemblies 
                             |> Seq.collect (AssemblyQueries.FindAllTypesImplementingInterface 
                                 typeof<System.IDisposable>.FullName)
-                            |> Seq.toArray
+
+    (* Write to the console to test our interface finding code! *)
+    disposableTypes
+       |> Seq.map (fun t -> t.FullName)
+       |> Seq.iter Console.WriteLine
 
     0 (* return an integer exit code *)
 {{< /highlight-custom >}}
 
+Debug your solution, and you should see all of the following disposable types:
+{{< highlight-custom language="text" header-text="Console Output" >}}
+SmartStore.DisposableObject
+SmartStore.Utilities.ActionDisposable
+SmartStore.Utilities.Threading.ReadLockDisposable
+SmartStore.Utilities.Threading.UpgradeableReadLockDisposable
+SmartStore.Utilities.Threading.WriteLockDisposable
+SmartStore.Core.Logging.IChronometer
+SmartStore.Core.Logging.NullChronometer
+SmartStore.Core.IO.ILockFile
+SmartStore.Core.IO.LockFile
+SmartStore.Core.Data.ITransaction
+SmartStore.Core.Data.DbContextScope
+SmartStore.Services.DataExchange.Excel.ExcelDataReader
+SmartStore.Services.DataExchange.Csv.CsvDataReader
+SmartStore.Services.DataExchange.Export.ExportXmlHelper
+SmartStore.Services.DataExchange.Export.IExportDataSegmenterProvider
+SmartStore.Services.DataExchange.Export.ExportDataSegmenter`1
+SmartStore.Web.Models.Catalog.ProductSummaryModel
+SmartStore.Web.Framework.WebApi.AutofacWebApiDependencyResolver
+SmartStore.Web.Framework.WebApi.AutofacWebApiDependencyScope
+{{< /highlight-custom >}}
 
-Debug your solution, and you should see all of the disposable types across the SmartStore.NET solution (19 total in my version of the program).
+*Note: When a type name in .NET has a backtick and a number (e.g. ExportDataSegmenter`1 in the above list), that means it represents a generic type. The number following the backtick is the number of generic type arguments supported by that type.*
 
 A Little Refactoring
 --------------------
@@ -209,7 +259,7 @@ let FilterTypes predicate (assembly: AssemblyDefinition) =
     |> Seq.filter predicate
 {{< /highlight-custom >}}
 
-Now we can rewrite our previous module using this new helper function. I think it's much cleaner this way:
+Now we can rewrite our previous module using this new helper function. Now, `FindAllTypesImplementingInterface` has an inner function `findMatchingInterfaces`. This inner function acts as the predicate for our helper function. I think it's much cleaner this way:
 {{< highlight-custom language="fsharp" header-text="AssemblyQueries.fs" >}}
 module AssemblyQueries
 
@@ -228,9 +278,286 @@ let FindAllTypesImplementingInterface interfaceFullName (assembly: AssemblyDefin
     assembly |> FilterTypes findMatchingInterfaces
 {{< /highlight-custom >}}
 
+All Domain Objects Have an Entity Framework Mapping
+---------------------------------------------------
+
+Let's try another querying example. In SmartStore.NET, EntityFramework acts as the ORM. It maps data residing in SQL tables to special classes called "Domain Classes". These are supposed to represent the application's [Domain Model](https://martinfowler.com/eaaCatalog/domainModel.html). In order to create this mapping, SmartStore.NET has special mapping classes that use Entity Framework's [Fluent API](https://msdn.microsoft.com/en-us/library/jj591617(v=vs.113).aspx). Let us suppose that every domain class must have a matching mapping class (this isn't actually true in the case of SmartStore.NET, but let's just assume it for the sake of the example). If the mapping class is missing, the system will not work correctly. 
+
+{{< figure-resource resource="img/domain-mapper-db.png" >}}
+
+Mono.Cecil can help us find out if the domain/mapping classes get out of sync. This type of query shows how flexible Mono.Cecil can be. It consists of the following steps:
+
+1. Identify the domain classes. In SmartStore.NET, domain classes are all located in the `SmartStore.Core.Domain` namespace.
+2. For each domain class, check to make sure there is a corresponding Entity Framework Fluent API mapping. A class is considered a mapping class if it is a concrete subclass of the EntityTypeConfiguration\<TEntityType\> class.
+3. If no mapping exists, annotate that fact in some way.
+
+You could imagine a query like this being written as a gate check in a deployment pipeline. If a domain class exists without an entity mapping (or vice versa), we consider that a high risk scenario for a bug, so we fail the deployment.
+
+Let's start with Step 1 from above. Add the following functions to your AssemblyQueries module:
+{{< highlight-custom language="fsharp" header-text="AssemblyQueries.fs" >}}
+let FindAllTypesInNamespace namespace' (assembly: AssemblyDefinition) =
+    assembly |> FilterTypes (fun t -> t.Namespace.StartsWith namespace')
+
+let FindAllConcreteClassesInNamespace namespace' (assembly: AssemblyDefinition) =
+    assembly
+        |> FindAllTypesInNamespace namespace'
+        |> Seq.filter (fun t -> t.IsClass && not t.IsAbstract)
+{{< /highlight-custom >}}
+
+*Note: in F#, you are allowed to use a single apostrophe `'` in a value/function name. In this case, I named a parameter `namespace'` to avoid a conflict with "namespace" which is a keyword in F#*
+
+Now let's try step 2. Add the following function to your AssemblyQueries module:
+{{< highlight-custom language="fsharp" header-text="AssemblyQueries.fs" >}}
+let QueryMissingEFMappings (assemblies: AssemblyDefinition[]) =
+    let efMapperClasses = 
+        assemblies
+            |> Array.toSeq
+            |> Seq.collect (FilterTypes (fun t -> 
+                match t.BaseType with
+                | null -> false
+                | baseType -> 
+                    baseType.FullName.StartsWith 
+                        "System.Data.Entity.ModelConfiguration.EntityTypeConfiguration`1"))
+
+    let domainClassesMapped = 
+        efMapperClasses
+            |> Seq.choose (fun t -> 
+                match t.BaseType with
+                | null -> None
+                | baseType -> 
+                    match baseType with
+                    | :? GenericInstanceType as genericInstance ->
+                        let genericArgs = Seq.toList genericInstance.GenericArguments
+                        match genericArgs with
+                        | [t] -> Some t
+                        | _ -> None
+                    | _ -> None)
+    
+    let domainClasses =
+        assemblies
+            |> Array.toSeq
+            |> Seq.collect (fun a -> a |> FindAllConcreteClassesInNamespace "SmartStore.Core.Domain")
+
+    let domainClassesMissingMappers =
+        domainClasses
+            |> Seq.filter (fun t ->
+                 domainClassesMapped 
+                    |> Seq.exists (fun m -> m.FullName = t.FullName)
+                    |> not)
+
+    domainClassesMissingMappers
+{{< /highlight-custom >}}
+
+The above function may seem complicated, but it isn't really if you break it down. Intermediate results are collected, and then a simple "exists" check is made to see if something is in one collection, but not the other. Some of the "match" cruft is because we are operating with a library intended to be used with C# (where nulls and type casting are commonplace). If I wanted to make the implementation cleaner, I might create a mapping from Mono.Cecil's API to friendlier F# types (or even just [Active Patterns](https://fsharpforfunandprofit.com/posts/completeness-seamless-dotnet-interop/#active-patterns-for-net-functions) to make my matches nicer).
+
+Now we can alter our `Program.fs` to call our new query.
+{{< highlight-custom language="fsharp" header-text="Program.fs" >}}
+open Mono.Cecil
+open System
+
+[<EntryPoint>]
+let main argv = 
+    let prefix = "SmartStore"
+
+    (* We want to exclude SmartStore.Licensing, because it's a weird
+       obfuscated assembly that we don't have the source for, so it
+       isn't relevant to our analysis. *)
+    let assemblies = (AssemblyLoader.LoadAllAssembliesByPrefix prefix argv.[0])
+                        |> Array.filter (fun a -> 
+                            a.MainModule.Name <> "SmartStore.Licensing.dll")
+
+    let domainClassesMissingMappers = 
+        AssemblyQueries.QueryMissingEFMappings assemblies
+
+    Console.WriteLine "Domain classes missing mappers:"
+    domainClassesMissingMappers
+        |> Seq.map (fun t -> sprintf "\t%s" t.FullName)
+        |> Seq.iter Console.WriteLine
+
+    0 (* return an integer exit code *)
+{{< /highlight-custom >}}
+
+You can see that there are actually quite a lot of domain classes that don't have a corresponding mapper classes. I created an imaginary rule that all domain classes must have mapper classes for purposes of working through an example. In SmartStore.NET, this actually isn't the case. Some domain classes aren't loaded through EF at all, and other domain classes are properties on other domain classes that get mapped by the container class' EF mapper.
+
+You could write similar queries to enforce business rules applicable to your code base.
+
 Build a Class Dependency Graph
 ==============================
 
-In C#, a class can contain a reference to another class via a field or property. This is called *composition* in object oriented programming. It is used when two classes share a "HAS A" relationship with each other (for example a Dog class HAS A Tail class). The class of the referenced property can then have its own fields/properties, creating a graph of vertices (.NET classes) and directed edges (an edge from E to V means that E contains a reference to V). You can brush up on some basic graph theory [here](https://en.wikipedia.org/wiki/Graph_theory). I also like [this MIT lecture](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-fall-2010/video-lectures/lecture-6-graph-theory-and-coloring/) taught by Tom Leighton (co-founder and current CEO of Akamai, one of the top CDNs in the world!).
+In C#, a class can contain a reference to another class via a field or property. This is called *composition* in object oriented programming. It is used when two classes share a "HAS A" relationship with each other (for example a Dog class HAS A Tail class). The class of the referenced property can then have its own fields/properties, creating a graph of vertices (.NET classes) and directed edges (an edge from V1 to V2 means that V1 contains a reference to V2). You can brush up on some basic graph theory [here](https://en.wikipedia.org/wiki/Graph_theory). I also like [this MIT lecture](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-fall-2010/video-lectures/lecture-6-graph-theory-and-coloring/) taught by Tom Leighton (co-founder and current CEO of Akamai, one of the top CDNs in the world!).
 
-Sometimes it can be helpful to visualize this dependency graph to see the relationships between different classes in your application (or even classes in libraries that you pull in). For example, you may be surprised that a top level class includes a reference indirectly through nested composition to some other class. Or you may be surprised to find cycles in this graph. Or it can be helpful to see how deeply nested this thing gets. The more nesting there is, the harder it is to reason about your application.
+Sometimes it can be helpful to visualize this dependency graph to see the relationships between different classes in your application (or even classes in libraries that you pull in). For example, you may be surprised that a top level class includes a reference indirectly through nested composition to some other class. Or you may be surprised to find cycles in this graph. Or it can be helpful to see how deeply nested things get. The more nesting there is, the harder it is to reason about your application. It can create subtle links between parts of your application you thought were totally separated.
+
+I am going to use [Cytoscape.js](http://js.cytoscape.org), along with [Dagre](https://github.com/dagrejs/dagre) as my graph visualization library. I need to traverse the properties of a Type using Mono.Cecil, and create a data structure that Cytoscape.js can consume. I should be able to use a simple recursive function for this, with the caveat that I must check for types that have already been visited to prevent infinite recursion (i.e. cycles).
+
+Create a new file named `DependencyGraph.fs`. I began, by adding some types that will map one-to-one to the json objects expected by Cytoscape.js:
+{{< highlight-custom language="fsharp" header-text="DependencyGraph.fs" >}}
+module DependencyGraph
+
+(* These objects mirror the Cytoscape.js api, and will be serialized to json *)
+type GraphObjectData = {
+    id: string;
+    name: string;
+    source: string;
+    target: string;
+}
+type GraphObject = {
+    group: string;
+    data: GraphObjectData;
+}
+{{< /highlight-custom >}}
+
+These types aren't very idiomatic for F#, but they are good enough for this simple example. The goal is to fold over the Mono.Cecil Type and its properties and return a type of `GraphObject list`. That will be able to be serialized to json, and consumed by Cytoscape.js.
+
+Because we know we'll be recursing over the properties of a type, let's create a helper function to grab the properties of a Mono.Cecil `TypeDefinition`. In our example, we'll only be interested in iterating over types in our namespace: `SmartStore`.
+{{< highlight-custom language="fsharp" header-text="DependencyGraph.fs" >}}
+let GetProps (t: TypeDefinition) =
+    t.Properties
+        |> Seq.toList
+        |> List.choose (fun p -> 
+            if (p.FullName.StartsWith "SmartStore")
+            then Some p
+            else None)
+{{< /highlight-custom >}}
+
+Here is an initial implementation of fold for our application:
+{{< highlight-custom language="fsharp" header-text="DependencyGraph.fs" >}}
+(* This function is a fold over Type Properties *)
+let rec TraverseProps fType acc (t: TypeDefinition) =
+    let recurse = TraverseProps fType
+    let props = GetProps t
+    match props with
+    | [] -> fType acc t
+    | ps ->
+        let ts = ps |> List.map (fun p -> p.PropertyType.Resolve())
+        let newAcc = fType acc t
+        ts |> List.fold recurse newAcc 
+{{< /highlight-custom >}}
+
+Folding over a data structure is a pretty typical operation in functional programming. I modeled my fold based on [the following example](https://fsharpforfunandprofit.com/posts/recursive-types-and-folds-2b/#fold-example-file-system-domain). Now, let's try to write a function that generates a graph. What should the initial arguments to TraverseProps be? `acc` should definitely be an empty list `[]`. `t` should be the TypeDefinition for the type we want to generate the dependency graph for. What should our function look like? It has a function signature of `'a -> TypeDefinition -> 'a`, where `'a` is the type of our accumulator. Well, we already know that we need the entire recursive fold function to return type `GraphObject list`, so we really have a function of type `GraphObject list -> TypeDefinition -> GraphObject list`. We know that the function will need to somehow create GraphObject values and append them to our accumulator linked list. Let's try to see what something like that would look like:
+{{< highlight-custom language="fsharp" header-text="DependencyGraph.fs" >}}
+let GenerateDependencyGraph (rootNode: TypeDefinition) =
+    rootNode
+        |> TraverseProps (fun elements t -> 
+            let nodeData = {
+                id = "Should we generate an id here?";
+                name = t.Name;
+                source = "";
+                target = "";
+            }
+            let node = {
+                group = "nodes";
+                data = nodeData;
+            }
+            let edgeData = {
+                id = "???";
+                name = "???";
+                source = "???";
+                target = "???";
+            }
+            let edge = {
+                group = "edges";
+                data = edgeData;
+            }
+            if (t = rootNode)
+            then node :: elements
+            else node :: edge :: elements) []
+{{< /highlight-custom >}}
+
+We seem to be missing some information in our implementation of fold (`TraverseProps`). We aren't able to create the edges between nodes, because each call to our passed in function only has information about the current node. It has no context of the parent node, or even it's own property Mono.Cecil metadata information (that was lost, when we called `PropertyType.Resolve()`). Because each iteration of our algorithm only depends on information from the parent in the recursion, we just need to pass that information in.
+
+Here is an updated fold implementation:
+{{< highlight-custom language="fsharp" header-text="DependencyGraph.fs" >}}
+(* This function is a fold over Type Properties *)
+let rec TraverseProps fType acc (t: TypeDefinition, propName: string, id: string, parentId: string) =
+    let recurse = TraverseProps fType
+    let props = GetProps t
+    match props with
+    | [] -> fType acc (t, propName, id, parentId)
+    | ps ->
+        let ts = ps |> List.map (fun p -> p.PropertyType.Resolve(), p.Name, System.Guid.NewGuid().ToString(), id)
+        let newAcc = fType acc (t, propName, id, parentId)
+        ts |> List.fold recurse newAcc 
+{{< /highlight-custom >}}
+
+Notice how we're passing in the property name, id of the current node being processed, and the parent node id. This will give us all of the information we need to build up our nodes/edges. In this case we're using tuples to pass in this data. We also could have created a special record type just for this purpose. It's just a matter of style. Here is an updated version of our graph generating function, which uses this newly passed in info. Notice how we're using tuple pattern matching in the parameters. That is a nifty F# trick!
+
+{{< highlight-custom language="fsharp" header-text="DependencyGraph.fs" >}}
+let GenerateDependencyGraph (rootNode: TypeDefinition) =
+    (rootNode, "", System.Guid.NewGuid().ToString(), "") 
+        |> TraverseProps (fun elements (t, propName, id, parentId) -> 
+            let nodeData = {
+                id = id;
+                name = t.Name;
+                source = "";
+                target = "";
+            }
+            let node = {
+                group = "nodes";
+                data = nodeData;
+            }
+            let edgeData = {
+                id = System.Guid.NewGuid().ToString();
+                name = propName;
+                source = parentId;
+                target = id;
+            }
+            let edge = {
+                group = "edges";
+                data = edgeData;
+            }
+            if (t = rootNode)
+            then node :: elements
+            else node :: edge :: elements) []
+{{< /highlight-custom >}}
+
+In order to create our dependency graph, we need to find a specific type within our assemblies by name. Add the following function to our queries module to accomplish this:
+{{< highlight-custom language="fsharp" header-text="AssemblyQueries.fs" >}}
+let FindTypeByFullName fullName (assembly: AssemblyDefinition) =
+    assembly |> FilterTypes (fun t -> t.FullName = fullName)
+{{< /highlight-custom >}}
+
+We can now update our `Program.fs` to use this newly added functionality, but first we're going to add a new dependency: `JSON.NET`. Open your `paket.dependencies` file and add the line `nuget Newtonsoft.Json`. Open up your paket.references file and add the line `Newtonsoft.Json`. Run the command `.paket/paket.exe install`. The dependency has been added to your project, and you can now serialize/deserialize json.
+{{< highlight-custom language="fsharp" header-text="Program.fs" >}}
+open DependencyGraph
+open Newtonsoft.Json
+
+[<EntryPoint>]
+let main argv = 
+    let prefix = "SmartStore"
+
+    (* We want to exclude SmartStore.Licensing, because it's a weird
+       obfuscated assembly that we don't have the source for, so it
+       isn't relevant to our analysis. *)
+    let assemblies = (AssemblyLoader.LoadAllAssembliesByPrefix prefix argv.[0])
+                        |> Array.filter (fun a -> 
+                            a.MainModule.Name <> "SmartStore.Licensing.dll")
+
+    let type' = assemblies
+                        |> Seq.collect (fun a -> 
+                            AssemblyQueries.FindTypeByFullName "SmartStore.Core.Domain.Common.Address" a)
+                        |> Seq.exactlyOne
+
+
+    let graph = GenerateDependencyGraph type'
+
+    let json = JsonConvert.SerializeObject(graph)
+
+    0 (* return an integer exit code *)
+{{< /highlight-custom >}}
+
+The contents of the `json` value above will be our graph! I'm going to gloss over the implementation from a front end perspective, but here are a few dependency graphs using our code. The type names are on the nodes, and the property names are on the vertices. Be careful while scrolling. If you try to scroll within the bounding box of the graph, you will be interacting with the graph and not scrolling the page as intended.
+
+{{< graph-container name="address" >}}
+
+Here is one for the Customer class. It is pretty large, so try zooming in:
+{{< graph-container name="customer" >}}
+
+{{< script-resource resource="js/dependency-graphs.js" >}}
+
+Oh no! We forgot to add code to detect cycles! This blog post is long enough, so I think that can wait for another day.
+
+Why Would We Go Through All This Effort?
+========================================
+
+It is true, that writing your own custom static analysis code is a lot more effort than just using an off the shelf solution. But, it doesn't need to be one or the other! When your use case is covered by an existing product, use it. However, when you run into a scenario so specific to your application that no third party tool could possibly address it, break out Mono.Cecil and get coding.

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <style>
+        #cy {
+            width: 400px;
+            height: 400px;
+            display: block;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.11/cytoscape.js"></script>
+    <script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
+    <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
+</head>
+
+<body>
+    <div id="cy"></div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'), // container to render in
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'content': 'data(name)',
+                        'text-opacity': 0.5,
+                        'text-valign': 'center',
+                        'text-halign': 'right',
+                        'background-color': '#11479e'
+                    }
+                },
+
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'width': 5,
+                        'target-arrow-shape': 'triangle',
+                        'line-color': '#9dbaea',
+                        'target-arrow-color': '#9dbaea',
+                        'content': 'data(name)'
+                    }
+                }
+            ],
+            elements: [{"group":"nodes","data":{"id":"43229c14-151a-4b2d-bded-152cdb4c00b0","name":"Country","source":"","target":""}},{"group":"edges","data":{"id":"3f5ef028-0630-40b3-93dc-49a21e2092c4","name":"Country","source":"7b888fb7-60fb-4a71-a6dc-111d9b58b272","target":"43229c14-151a-4b2d-bded-152cdb4c00b0"}},{"group":"nodes","data":{"id":"7b888fb7-60fb-4a71-a6dc-111d9b58b272","name":"StateProvince","source":"","target":""}},{"group":"edges","data":{"id":"e214a6ab-c0c8-46ec-92e4-1136ad91f831","name":"StateProvince","source":"efac72bd-3f52-4a83-ade7-3fb813621606","target":"7b888fb7-60fb-4a71-a6dc-111d9b58b272"}},{"group":"nodes","data":{"id":"46eea0e8-f520-4fb9-a41e-6eb2fee9b253","name":"Country","source":"","target":""}},{"group":"edges","data":{"id":"aba64e2f-a9f4-4783-8bf2-636187f731cf","name":"Country","source":"efac72bd-3f52-4a83-ade7-3fb813621606","target":"46eea0e8-f520-4fb9-a41e-6eb2fee9b253"}},{"group":"nodes","data":{"id":"efac72bd-3f52-4a83-ade7-3fb813621606","name":"Address","source":"","target":""}}],
+            layout: { name: 'dagre', spacingFactor: 1.75 }
+        });
+    </script>
+</body>
+
+</html>
