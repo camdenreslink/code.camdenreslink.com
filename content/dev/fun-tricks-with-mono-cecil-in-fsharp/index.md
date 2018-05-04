@@ -4,7 +4,6 @@ subtitle = "Using Mono.Cecil to Discover Things About Your .NET Projects"
 bannerFigCaption = ""
 date = "2018-02-24"
 summary = "Static code analysis is the process of investigating the structure of a program without actually executing it (as opposed to things that happen at runtime like reflection, logging, running unit tests, or debugging). In this post, we'll be investigating interesting ways to leverage the Mono.Cecil library to analyze .NET projects."
-draft=true
 graphsIncluded=true
 +++
 
@@ -14,7 +13,7 @@ Preview
 =======
 
 By the end of this blog post, we'll be able to create cool [dependency graphs](https://en.wikipedia.org/wiki/Dependency_graph) based on our .NET classes like the following:
-{{< graph-container name="address" >}}
+{{< graph-container name="customer" >}}
 
 Background
 ==========
@@ -550,12 +549,12 @@ The contents of the `json` value above will be our graph! I'm going to gloss ove
 
 {{< graph-container name="address" >}}
 
-Here is one for the Customer class. It is pretty large, so try zooming in:
-{{< graph-container name="customer" >}}
+Here is one for the Product class. It is pretty large, so try zooming in:
+{{< graph-container name="product" >}}
 
 {{< script-resource resource="js/dependency-graphs.js" >}}
 
-Oh no! We forgot to add code to detect cycles! This blog post is long enough, so I think that can wait for another day.
+Oh no! We forgot to add code to detect cycles! This blog post is long enough, so I think that can wait for another day. Another oversight, is that we aren't digging into generic types (like collections) to traverse those nested property types. A lot could be done to make this code more complete, but I think you get the gist of it.
 
 Why Would We Go Through All This Effort?
 ========================================
