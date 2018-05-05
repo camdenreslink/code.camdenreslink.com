@@ -12,11 +12,11 @@
     </nav>
     <nav id="secondary-nav">
         <ul>
-            <li id="{{ if eq .Section "" }}selected-category{{ end }}"><a href="/">All</a></li><!--
-         --><li id="{{ if eq .Section "dev" }}selected-category{{ end }}"><a href="/dev">Dev</a></li><!--
-         --><li id="{{ if eq .Section "data" }}selected-category{{ end }}"><a href="/data">Data</a></li><!--
-         --><li id="{{ if eq .Section "math" }}selected-category{{ end }}"><a href="/math">Math</a></li><!--
-         --><li id="{{ if eq .Section "misc" }}selected-category{{ end }}"><a href="/misc">Misc</a></li>
+            <li id="{{ if eq .URL "/" }}selected-category{{ end }}"><a href="/">All</a></li><!--
+         --><li id="{{ if hasPrefix .URL "/dev/" }}selected-category{{ end }}"><a href="/dev">Dev</a></li><!--
+         --><li id="{{ if hasPrefix .URL "/data/" }}selected-category{{ end }}"><a href="/data">Data</a></li><!--
+         --><li id="{{ if hasPrefix .URL "/math/" }}selected-category{{ end }}"><a href="/math">Math</a></li><!--
+         --><li id="{{ if hasPrefix .URL "/misc/" }}selected-category{{ end }}"><a href="/misc">Misc</a></li>
         </ul>
     </nav>
 </header>

@@ -9,3 +9,4 @@ pygmentsUseClasses = false
 pygmentsStyle = "monokai"
 pygmentsCodefencesGuessSyntax = true
 pygmentsOptions= ""
+pluralizelisttitles = false

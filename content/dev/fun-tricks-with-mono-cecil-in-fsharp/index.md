@@ -2,7 +2,7 @@
 title = "Fun Tricks with Mono.Cecil in F#"
 subtitle = "Using Mono.Cecil to Discover Things About Your .NET Projects"
 bannerFigCaption = ""
-date = "2018-02-24"
+date = "2018-05-05"
 summary = "Static code analysis is the process of investigating the structure of a program without actually executing it (as opposed to things that happen at runtime like reflection, logging, running unit tests, or debugging). In this post, we'll be investigating interesting ways to leverage the Mono.Cecil library to analyze .NET projects."
 graphsIncluded=true
 +++
