@@ -1,24 +1,22 @@
 {{ $isAll := eq .Section "" }}
 <main class="listing-container">
-    {{ range .Paginator.Pages }}
-        {{ if ne .Type "no-content"}}
-            <article class="post-listing">
-                <a href="{{ .Permalink }}"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="{{ partial "thumbnail-url.html" . }}" alt="{{ .Title }}">{{ if $isAll }}<div class="recent-post-category">{{ .Section | humanize }}</div>{{ end }}</span></a>
-                <div class="post-listing-details">
-                    <div class="post-listing-date">{{ .Date.Format "January 2, 2006" }}</div>
-                    <div class="post-listing-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
-                    <p>
-                        {{ if .Params.summary }}
-                            {{ .Params.summary }}
-                        {{ else }}
-                            {{ .Summary }}{{ if .Truncated }}...{{ end }}
-                        {{ end }}
-                    </p>
-                    <a class="post-listing-read-more" href="{{ .Permalink }}">Read More</a>
-                </div>
-            </article>
-            <div class="post-listing-divider"></div>
-        {{ end }}
+    {{ range where .Paginator.Pages "Type" "!=" "no-content" }}
+        <article class="post-listing">
+            <a href="{{ .Permalink }}"><span class="post-listing-img-wrapper"><img class="post-listing-img" src="{{ partial "thumbnail-url.html" . }}" alt="{{ .Title }}">{{ if $isAll }}<div class="recent-post-category">{{ .Section | humanize }}</div>{{ end }}</span></a>
+            <div class="post-listing-details">
+                <div class="post-listing-date">{{ .Date.Format "January 2, 2006" }}</div>
+                <div class="post-listing-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+                <p>
+                    {{ if .Params.summary }}
+                        {{ .Params.summary }}
+                    {{ else }}
+                        {{ .Summary }}{{ if .Truncated }}...{{ end }}
+                    {{ end }}
+                </p>
+                <a class="post-listing-read-more" href="{{ .Permalink }}">Read More</a>
+            </div>
+        </article>
+        <div class="post-listing-divider"></div>
     {{ end }}
     <nav class="pagination">
         {{ if .Paginator.HasPrev }}
