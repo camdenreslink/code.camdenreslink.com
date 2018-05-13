@@ -20,9 +20,47 @@
     content: "\2013";
 }
 
+.social-icon-nav {
+    display: block;
+    float: right;
+    height: 30px;
+    margin: 10px 15px 0 0;
+}
+
+#social-icon-mobile {
+    background-color: @primary-color;
+    padding-left: percentage(@mobile-gutter-size);
+}
+
+#social-icon-mobile a {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.social-icon-mobile {
+    height: 30px;
+    margin: 10px 15px 10px 0;
+    display: block;
+}
+
+@media @for-phone-only {
+    .social-icon-nav {
+        display: none;
+    }
+}
+@media @for-tablet-portrait-up {
+    #social-icon-mobile {
+        display: none;
+    }
+    .social-icon-nav-dropdown {
+        display: none;
+    }
+}
+
 #secondary-nav {
     text-align: center;
     overflow: hidden;
+    clear: both;
 
     ul {
         list-style: none;

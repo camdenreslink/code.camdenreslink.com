@@ -35,9 +35,42 @@ main {
   color: #f1f1f1;
   content: "\2013";
 }
+.social-icon-nav {
+  display: block;
+  float: right;
+  height: 30px;
+  margin: 10px 15px 0 0;
+}
+#social-icon-mobile {
+  background-color: #084B7F;
+  padding-left: 7.5%;
+}
+#social-icon-mobile a {
+  display: inline-block;
+  vertical-align: top;
+}
+.social-icon-mobile {
+  height: 30px;
+  margin: 10px 15px 10px 0;
+  display: block;
+}
+@media (max-width: 599px) {
+  .social-icon-nav {
+    display: none;
+  }
+}
+@media (min-width: 599px) {
+  #social-icon-mobile {
+    display: none;
+  }
+  .social-icon-nav-dropdown {
+    display: none;
+  }
+}
 #secondary-nav {
   text-align: center;
   overflow: hidden;
+  clear: both;
 }
 #secondary-nav ul {
   list-style: none;
