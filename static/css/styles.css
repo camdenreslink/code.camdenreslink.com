@@ -429,6 +429,32 @@ main {
     width: 42%;
   }
 }
+blockquote {
+  background: #d7d7d7;
+  border-left: 10px solid #8b8b8b;
+  margin: 3.5% 0 3.5% -8.82352941%;
+  padding: 1em;
+  width: 117.64705882%;
+  line-height: 1.4;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+@media (min-width: 599px) {
+  blockquote {
+    margin: 3.5% 0;
+    width: auto;
+  }
+}
+blockquote:before {
+  color: #8b8b8b;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
 .box-shadow {
   box-shadow: 0.1em 0.1em 0.5em -0.2em #272822;
 }

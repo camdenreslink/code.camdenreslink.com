@@ -207,10 +207,10 @@
 }
 
 @code-padding: 15px;
-.highlight-custom {
-    @mobile-gutter-offset: @mobile-gutter-size / (1 - 2 * @mobile-gutter-size);
-    @desktop-gutter-offset: @desktop-gutter-size / (1 - 2 * @desktop-gutter-size);
+@mobile-gutter-offset: @mobile-gutter-size / (1 - 2 * @mobile-gutter-size);
+@desktop-gutter-offset: @desktop-gutter-size / (1 - 2 * @desktop-gutter-size);
 
+.highlight-custom {
     margin: 3.5% 0 3.5% percentage(-1 * @mobile-gutter-offset);
     font-family: 'Source Code Pro', monospace;
     line-height: 1.4;
@@ -271,6 +271,34 @@
         margin: 3.5% 5% 3.5% 0;
         width: 42%;
     }
+}
+
+blockquote {
+    background: darken(@hover-background-color, 5%);
+    border-left: 10px solid darken(@hover-background-color, 35%);
+    margin: 3.5% 0 3.5% percentage(-1 * @mobile-gutter-offset);
+    padding: 1em;
+    width: percentage(1 + 2 * @mobile-gutter-offset);
+    line-height: 1.4;
+    quotes: "\201C""\201D""\2018""\2019";
+
+    @media @for-tablet-portrait-up {
+        margin: 3.5% 0;
+        width: auto;
+    }
+}
+
+blockquote:before {
+    color: darken(@hover-background-color, 35%);
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+blockquote p {
+    display: inline;
 }
 
 .box-shadow {
