@@ -19,12 +19,12 @@ datatype and new functions over the datatype, without recompiling
 existing code, and while retaining static type safety (e.g., no
 casts).
 
-The problem is best understood via code, so we will examine the shapes example outlined above in both C# and F#. Object oriented and functional programming languages have different characteristics when examined within the context of the expression problem.
+The problem is best understood via code, so we will examine the shapes example outlined above in both C# and F#. Object oriented and functional programming languages have different characteristics within the context of the expression problem.
 
 Object Oriented - C#
 ====================
 
-The way that we would typically represent *cases* that support common *operations* in object oriented programming is to create an abstract superclass that defines virtual methods, and for each case create a subclass that overrides those methods. For example, here is our abstract superclass. It defines the operations that our cases will support:
+The way that we would typically represent *cases* that support common *operations* in object oriented programming is to create an abstract superclass that defines virtual/abstract methods, and for each case create a subclass that overrides those methods. For example, here is our abstract superclass. It defines the operations that our cases will support:
 
 {{< highlight-custom language="csharp" header-text="Shape.cs" >}}
 public abstract class Shape
@@ -110,7 +110,7 @@ public class RightTriangle : Shape
 }
 {{< /highlight-custom >}}
 
-The case-adding clause of the expression problem was satisfied, because we didn't need to modify the base class or any of the other subclasses to add a new case! What about adding a new operation over these cases? Let's add centroid (the center of the shape). We'll have to add it to our base class first:
+The case-adding clause of the expression problem was satisfied, because we didn't need to modify the base class or any of the other subclasses to add a new case. What about adding a new operation over these cases? Let's add centroid (the center of the shape). We'll have to add it to our base class first:
 
 {{< highlight-custom language="csharp" header-text="Shape.cs" >}}
 public abstract class Shape
@@ -121,7 +121,7 @@ public abstract class Shape
 }
 {{< /highlight-custom >}}
 
-Oh no! We're going to have to add it to every single one of our subclasses, modifying each subclass!
+Oh no! We're going to have to add it to every single one of our subclasses.
 
 {{< highlight-custom language="csharp" header-text="C#" >}}
 public class Rectangle : Shape
@@ -242,7 +242,7 @@ let circle = Circle 2.42
 area circle |> Console.WriteLine
 {{< /highlight-custom >}}
 
-If you've never used F# before, you'll notice how much more succinct it is than the equivalent C#. The match expressions look like super-charged case statements. Each case is represented by a case in our discriminated union, and each operation is represented by a function. Let's try what was so difficult in C#; let's try to add a new operation, centroid.
+If you've never used F# before, you'll notice how much more succinct it is than the equivalent C#. The match expressions look like super-charged [switch statements](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/switch). Each case in the shape example is represented by a case in our discriminated union, and each operation is represented by a function. Let's try what was so difficult in C#; let's try to add a new operation, `centroid`.
 
 {{< highlight-custom language="fsharp" header-text="F#" >}}
 let centroid shape =
@@ -257,7 +257,7 @@ let rectangle = Rectangle (42.42, 67.67)
 centroid rectangle |> printfn "%A"
 {{< /highlight-custom >}}
 
-We didn't have to alter any of the other functions, or the initial definition of the cases! Neat! So, the expression problem is satisfied for creating new operations in the functional style of programming. This was something we couldn't achieve a second ago with idiomatic object oriented code. What if we try to add a new case to our functional code:
+We didn't have to alter any of the other functions, or the initial definition of the cases. Neat! So, the expression problem is satisfied for creating new operations in the functional style of programming. This was something we couldn't achieve a second ago with idiomatic object oriented code. What if we try to add a new case to our functional code:
 
 {{< highlight-custom language="fsharp" header-text="F#" >}}
 type Shape = 
@@ -266,7 +266,7 @@ type Shape =
     | RightTriangle of base': double * height: double
 {{< /highlight-custom >}}
 
-If we were to recompile, we'd see that all of our match expressions now fail to build. This is because of the exhaustive pattern matching mentioned before. We are now missing the RightTriangle case. So, we must edit all of the functions to account for the new case:
+If we were to recompile, we would see that all of our match expressions now fail to build. This is because of the exhaustive pattern matching previously mentioned. We are now missing the RightTriangle case in our match expressions. Consequently, we must edit all of the functions to account for the new case:
 
 {{< highlight-custom language="fsharp" header-text="Shape.fs" >}}
 open System
@@ -315,7 +315,193 @@ Using the Visitor Pattern
 
 The [Visitor Pattern](https://en.wikipedia.org/wiki/Visitor_pattern) confers some of the benefits of the functional style in an object oriented language. It allows you to add new operations to your data structure, without having to recompile the code that defines the data structure itself. The downsides are, it's hard to understand if you don't know what you're looking at, and it clutters your code with implementation details that aren't really relevant to your business logic.
 
-Here is a basic implementation of the Visitor Pattern using our shapes example above:
+Here is a basic implementation of the Visitor Pattern using our shapes example above (with `Rectangle`, `Circle`, and `Area`):
 
 {{< highlight-custom language="csharp" header-text="C#" >}}
+using System;
+using System.Collections.Generic;
+
+interface IVisitable 
+{ 
+	void Accept(IVisitor visitor); 
+}
+
+public interface IVisitor {
+  void Visit(Rectangle rectangle);
+  void Visit(Circle circle);
+}
+
+public abstract class Shape : IVisitable
+{
+	abstract public void Accept(IVisitor visitor);
+}
+
+
+public class Rectangle : Shape
+{
+	public double Width { get; private set; }
+	public double Height { get; private set; }
+	
+	public Rectangle(double width, double height)
+	{
+		this.Width = width;
+		this.Height = height;
+	}
+	
+	public override void Accept(IVisitor visitor)
+	{
+		visitor.Visit(this);
+	}
+}
+
+public class Circle : Shape
+{
+	public double Radius { get; private set; }
+	
+	public Circle(double radius)
+	{
+		this.Radius = radius;
+	}
+	
+	public override void Accept(IVisitor visitor)
+	{
+		visitor.Visit(this);
+	}
+}
+
+public class AreaVisitor : IVisitor
+{
+	public double Area { get; private set; }
+	
+	public void Visit(Rectangle rectangle) 
+	{
+		this.Area = rectangle.Width * rectangle.Height;
+	}
+	
+	public void Visit(Circle circle)
+	{
+		this.Area = Math.PI * circle.Radius * circle.Radius;
+	}
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		var rectangle = new Rectangle(1.1, 2.2);
+		var circle = new Circle(1);
+		var shapeList = new List<Shape>() { rectangle, circle };
+		foreach(var shape in shapeList)
+		{
+			var areaVisitor = new AreaVisitor();
+			shape.Accept(areaVisitor);
+			Console.WriteLine(areaVisitor.Area);
+		}
+	}
+}
 {{< /highlight-custom >}}
+
+Our data structures and operations are separated using this design pattern. All of the area calculations are grouped inside of the `AreaVisitor` class (rather than a method on each class itself). One negative effect of this pattern as implemented here is the breaking of encapsulation of our shape subclasses. Previously, we could hide data private to the specific shapes. For example, a circle stored its radius using the following signature: `private readonly double radius;`. No code outside of the class could access its value. In the new version, our `AreaVisitor` needs access to this data to calculate the area, so it is declared as: `public double Radius { get; private set; }`.
+
+What if we need to add an operation to our code? For example, let's add perimeter calculation code:
+
+{{< highlight-custom language="csharp" header-text="C#" >}}
+public class PerimeterVisitor : IVisitor
+{
+	public double Perimeter { get; private set; }
+	
+	public void Visit(Rectangle rectangle) 
+	{
+		this.Perimeter = 2 * (rectangle.Width + rectangle.Height);
+	}
+	
+	public void Visit(Circle circle)
+	{
+		this.Perimeter = 2 * Math.PI + circle.Radius;
+	}
+}
+{{< /highlight-custom >}}
+
+All we had to do was add another Visitor class implementing the perimeter logic. The visitor pattern satisfies the operations condition of the expression problem. What if we want to add another shape? First we need to add another shape subclass:
+
+{{< highlight-custom language="csharp" header-text="C#" >}}
+public class RightTriangle : Shape
+{
+	public double BaseLength { get; private set; }
+	public double Height { get; private set; }
+
+	public RightTriangle(double baseLength, double height)
+	{
+		this.BaseLength = baseLength;
+		this.Height = height;
+	}
+	
+	public override void Accept(IVisitor visitor)
+	{
+		visitor.Visit(this);
+	}
+}
+{{< /highlight-custom >}}
+
+We've had our `RightTriangle` subclass implement the `IVisitable` interface to be compatible with our visitor pattern. Now we need to update the `IVisitor` interface to add the new case. This will force the different visitor implementations to account for our new case.
+
+{{< highlight-custom language="csharp" header-text="C#" >}}
+public interface IVisitor {
+  void Visit(Rectangle rectangle);
+  void Visit(Circle circle);
+  void Visit(RightTriangle rightTriangle);
+}
+{{< /highlight-custom >}}
+
+Here are the visitor implementations updated:
+
+{{< highlight-custom language="csharp" header-text="C#" >}}
+public class AreaVisitor : IVisitor
+{
+	public double Area { get; private set; }
+	
+	public void Visit(Rectangle rectangle) 
+	{
+		this.Area = rectangle.Width * rectangle.Height;
+	}
+	
+	public void Visit(Circle circle)
+	{
+		this.Area = Math.PI * circle.Radius * circle.Radius;
+	}
+	
+	public void Visit(RightTriangle rightTriangle)
+	{
+		this.Area = 0.5 * rightTriangle.BaseLength * rightTriangle.Height;
+	}
+}
+
+public class PerimeterVisitor : IVisitor
+{
+	public double Perimeter { get; private set; }
+	
+	public void Visit(Rectangle rectangle) 
+	{
+		this.Perimeter = 2 * (rectangle.Width + rectangle.Height);
+	}
+	
+	public void Visit(Circle circle)
+	{
+		this.Perimeter = 2 * Math.PI + circle.Radius;
+	}
+	
+	public void Visit(RightTriangle rightTriangle)
+	{
+		this.Perimeter = rightTriangle.BaseLength + rightTriangle.Height 
+			+ Math.Sqrt(rightTriangle.BaseLength * rightTriangle.BaseLength 
+				+ rightTriangle.Height * rightTriangle.Height);
+	}
+}
+{{< /highlight-custom >}}
+
+If we add a new case, we have to update every single visitor class to account for the new case. This fails the cases condition of the expression problem, because we would have to recompile the code implementing the visitor classes. The visitor pattern reproduces the characterstics of the functional programming approach in an object oriented language.
+
+Conclusion
+==========
+
+Faced with such a difficult problem, what is to be done in .NET? Ultimately it depends on making compromises based on how your code evolves. If your data remains the same over time, the functional or visitor pattern approach is best. It allows you to add new operations over your data (as functions or visitor classes) without having to recompile the rest of your application. If your data is constantly changing with new cases being added all the time, the object oriented approach may be best. It allows you to add new cases (as subclasses) without recompiling the rest of your application. As with many things in programming, the answer is "it depends".

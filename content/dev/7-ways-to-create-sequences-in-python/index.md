@@ -11,6 +11,8 @@ Background
 
 A *sequence* in mathematics, is a collection (like a set) of mathematical objects where the order of the objects is significant, and duplicate members of the collection are allowed. In computer science, we represent sequences as arrays, lists, streams, and a variety of other data structures. Creating sequences and operations on already existing sequences is at the core of many software applications. In this post, we'll look at some techniques for creating sequences using Python 3. The methods will vary based on the sequence we want to produce. Some sequences are infinite, some depend on their index, some depend on previous values in the sequence.
 
+*Note: The sequences in this post are any generic type of iterable thing that matches the mathematical defintion of a sequence above. I am not talking about the specific Python notion of a sequence. [For the Python version of a sequence, see here](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)*.
+
 For-Loop
 ========
 
@@ -125,6 +127,8 @@ You can use the `itertools.islice` library to take the first n-values:
 {{< highlight-custom language="python" header-text="python" >}}
 first10 = itertools.islice(squares(), 10)
 {{< /highlight-custom >}}
+
+*Pro tip: The [itertools module](https://docs.python.org/3/library/itertools.html) is very helpful for all things iterators.*
 
 Generator Expression
 ====================
