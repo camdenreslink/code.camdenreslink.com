@@ -9,3 +9,9 @@ My personal programming blog. Uses the Hugo static site generator.
 - Run `npm run create-thumbnails` to build thumbnail images.
 - Run `npm run build-css` to build css from less files.
 - Run `hugo server` to build the site and run it in a local dev server.
+
+## Deployment
+
+- `npm install -g firebase-tools`
+- `firebase login`
+- `hugo && firebase deploy`
