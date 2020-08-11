@@ -19,7 +19,8 @@
   "homepage": "https://github.com/camdenreslink/code.camdenreslink.com#readme",
   "devDependencies": {
     "minimatch": "^3.0.4",
-    "recursive-readdir": "^2.2.1",
-    "sharp": "^0.19.0"
+    "recursive-readdir": "^2.2.2",
+    "sharp": "^0.25.4",
+    "less": "^3.12.2"
   }
 }

@@ -1,1 +1,1 @@
-{{ print "/img/thumbnails/" (replace (strings.TrimSuffix "\\" .Dir) "\\" "/") ".png" }}
+{{ print "/img/thumbnails/" (strings.TrimSuffix "/" .Dir) ".png" }}
