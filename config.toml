@@ -10,3 +10,8 @@ pygmentsStyle = "monokai"
 pygmentsCodefencesGuessSyntax = true
 pygmentsOptions= ""
 pluralizelisttitles = false
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -493,7 +493,8 @@ blockquote p {
 .recent-post {
   position: relative;
   margin: 5% 0;
-  padding: 10% 7.5%;
+  text-align: center;
+  padding: 2% 7.5%;
 }
 .recent-post:first-of-type {
   padding-top: 5%;
