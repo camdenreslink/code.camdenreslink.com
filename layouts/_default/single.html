@@ -20,7 +20,7 @@
 				--><aside id="recent-posts">
 					<h1>Recent Posts</h1>
 					{{/* Display the most recent posts, excluding the current page */}}
-					{{ range first 5 (where (where (where .Site.Pages "UniqueID" "!=" .UniqueID) "IsPage" true ) "Type" "!=" "no-content") }}
+					{{ range first 5 (where (where (where .Site.Pages "Permalink" "!=" .Permalink) "IsPage" true ) "Type" "!=" "no-content") }}
 						<div class="recent-post">
 							<a href="{{ .Permalink }}"><img src="{{ partial "thumbnail-url.html" . }}" alt="{{ .Title }}"><div class="recent-post-category">{{ .Section | humanize }}</div></a>
 							<div class="recent-post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>

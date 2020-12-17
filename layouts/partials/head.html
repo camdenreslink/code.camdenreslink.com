@@ -6,5 +6,7 @@
     <title>{{ .Title }} — Camden Reslink</title>
     <link rel="canonical" href="{{ .Permalink }}">
     {{ partial "head.includes.html" . }}
-    {{ if .RSSLink }}<link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />{{ end }}
+    {{ with .OutputFormats.Get "rss" }}
+        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end }}
 </head>
