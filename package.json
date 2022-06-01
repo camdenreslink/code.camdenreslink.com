@@ -20,7 +20,7 @@
   "devDependencies": {
     "minimatch": "^3.0.4",
     "recursive-readdir": "^2.2.2",
-    "sharp": "^0.25.4",
+    "sharp": "^0.30.5",
     "less": "^3.12.2"
   }
 }
